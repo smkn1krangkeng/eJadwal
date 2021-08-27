@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>eRapor | @yield('judul_hal')</title>
+  <title>eJadwal | @yield('judul_hal')</title>
   @include('layout.backend.style') 
   @include('layout.backend.header') 
   @stack('css')
@@ -20,8 +20,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{{url('logo/ms-icon-70x70.png')}}" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">eRapor SMK</span>
+      <img src="{{url('logo/ms-icon-70x70.png')}}" alt="eJadwal" class="brand-image elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">eJadwal</span>
     </a>
 
     <!-- Sidebar -->
