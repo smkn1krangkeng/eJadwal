@@ -1,0 +1,1 @@
+<link rel="icon" type="image/png" href="{{url('logo/favicon-32x32.png')}}">
