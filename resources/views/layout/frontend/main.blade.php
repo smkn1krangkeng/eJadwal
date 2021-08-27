@@ -19,7 +19,9 @@
       <!-- /.login-logo -->
       <div class="card card-outline card-primary">
         <div class="card-header text-center">
-          <a href="#" class="h1"><b>e</b>Jadwal</a>
+        <a href="#" class="h1">
+        <img src="{{url('img/logo2.png')}}" alt="eJadwal" class="" style="width:70px; height:70px">
+        </a>
         </div>
         <div class="card-body">
           <p class="login-box-msg">Sign in to start your session</p>
