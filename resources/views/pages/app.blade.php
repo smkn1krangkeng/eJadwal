@@ -4,47 +4,50 @@
 @endpush
 @push('scripts')
 @endpush
-@section('konten')
-<div class="row" style="margin-top: 12px;margin-bottom: 12px;">
-    <div class="col d-flex justify-content-center align-items-center justify-content-md-center align-items-md-center" style="padding: 0px;"><img class="w-100 h-100" style="margin: 0px;margin-left: 10px;margin-right: 10px;padding: 20px;border-radius: 25px;box-shadow: 0px 0px;" src="{{url('img/bkg-smk.png')}}"></div>
-    <div class="col-12 col-md-6 offset-lg-0 d-flex justify-content-center align-items-center justify-content-md-center align-items-md-center" style="padding: 0px;">
-        <form class="d-md-flex align-items-md-center">
-            <div style="margin-top: 10px;margin-bottom: 10px;width: 287px;"><label class="form-label" style="margin-top: 6px;">Username :</label><input class="form-control" type="text" style="border-radius: 50px;border-style: none;"><label class="form-label" style="margin-top: 6px;">Password :</label><input class="form-control" type="password" style="border-radius: 50px;border-style: none;"><button class="btn btn-primary" type="button" style="margin-top: 12px;margin-bottom: 6px;border-radius: 20px;">Sign In</button></div>
-        </form>
-    </div>
-</div>
-@endsection
-@section('cards')
-<div class="row">
-    <div class="col-12 col-md-4" style="padding: 0px;">
-        <div class="card" style="margin: 20px;border-radius: 8px;margin-top: 10px;margin-bottom: 10px;">
-            <div class="card-header">
-                <h4>Title</h4>
-            </div>
-            <div class="card-body">
-                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><a class="card-link" href="#">Read More ...</a>
-            </div>
+@section('login_form')
+<div class="card card-outline card-primary">
+        <div class="card-header text-center">
+        <a href="#" class="h1">
+        <img src="{{url('img/logo2.png')}}" alt="eJadwal" class="" style="width:70px; height:70px">
+        </a>
         </div>
-    </div>
-    <div class="col" style="padding: 0px;">
-        <div class="card" style="margin: 20px;border-radius: 8px;margin-top: 10px;margin-bottom: 10px;">
-            <div class="card-header">
-                <h4>Title</h4>
+        <div class="card-body">
+          <p class="login-box-msg">Sign in to start your session</p>
+          <form action="{{url('/login')}}" method="post">
+          {{ csrf_field() }}
+            <div class="input-group mb-3">
+              <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
             </div>
-            <div class="card-body">
-                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><a class="card-link" href="#">Read More ...</a>
+            <div class="input-group mb-3">
+              <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
             </div>
+            <div class="row">
+              <div class="col-8">
+                <div class="icheck-primary">
+                  <input type="checkbox" id="remember">
+                  <label for="remember">
+                    Remember Me
+                  </label>
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
         </div>
-    </div>
-    <div class="col-12 col-md-4" style="padding: 0px;">
-        <div class="card" style="margin: 20px;border-radius: 8px;margin-top: 10px;margin-bottom: 10px;">
-            <div class="card-header">
-                <h4>Title</h4>
-            </div>
-            <div class="card-body">
-                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><a class="card-link" href="#">Read More ...</a>
-            </div>
-        </div>
-    </div>
-</div>
+        <!-- /.card-body -->
+      </div>
 @endsection
