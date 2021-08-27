@@ -20,7 +20,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{{url('logo/ms-icon-70x70.png')}}" alt="eJadwal" class="brand-image elevation-3" style="opacity: .8">
+      <img src="{{url('img/logo.png')}}" alt="eJadwal" class="brand-image elevation-1" style="opacity: .7">
       <span class="brand-text font-weight-light">eJadwal</span>
     </a>
 
