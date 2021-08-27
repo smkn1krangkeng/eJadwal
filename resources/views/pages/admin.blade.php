@@ -95,6 +95,8 @@
               </div><!-- /.card-header -->
               <div class="card-body">
                   ini konten
+                  <br>
+                  {{ cobahelper() }}
               </div><!-- /.card-body -->
             </div>
             <!-- /.card -->
