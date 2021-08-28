@@ -23,6 +23,19 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cog text-warning"></i>
+              <p>
+              @hasanyrole('admin')
+              Menu Admin
+              @endhasanyrole
+              @hasanyrole('gurumapel')
+              Menu Guru Mapel
+              @endhasanyrole
+              </p>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cogs text-danger"></i>
               <p>
                 Master

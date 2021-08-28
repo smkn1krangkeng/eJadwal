@@ -20,7 +20,6 @@ class UserSeeder extends Seeder
             'email' => 'admin@test.id',
             'password' => bcrypt('12345678'),
         ]);
-
         $admin->assignRole('admin');
 
         $user = User::create(
@@ -29,7 +28,14 @@ class UserSeeder extends Seeder
             'email' => 'user@test.id',
             'password' => bcrypt('12345678'),
         ]);
-
         $user->assignRole('user');
+        
+        $gurumapel = User::create(
+            [
+                'name' => 'Guru Mapel',
+                'email' => 'gurumapel@test.id',
+                'password' => bcrypt('12345678'),
+            ]);
+        $gurumapel->assignRole('gurumapel');
     }
 }

@@ -19,8 +19,16 @@ Route::get('/login', [LoginController::class, 'getLogin'])->middleware('guest')-
 Route::post('/login', [LoginController::class, 'postLogin']);
 Route::post('/logout', [LoginController::class, 'logout']);
 //backend page
-Route::group(['middleware' => ['auth','role:admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
+    // role untuk yang auth
     Route::get('/dashboard', function () {return view('pages.admin');})->name('dashboard');
+    
+    /* role untuk admin
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('/menu_admin', function () {return view('pages.menu_admin');})->name('menu_admin');
+    });
+    */
+
 });
 
 
