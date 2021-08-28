@@ -20,9 +20,7 @@ Route::post('/login', [LoginController::class, 'postLogin']);
 Route::post('/logout', [LoginController::class, 'logout']);
 //backend page
 Route::group(['middleware' => ['auth','role:admin']], function () {
-    Route::get('/dashboard', function () {
-        return view('pages.admin');
-    });
+    Route::get('/dashboard', function () {return view('pages.admin');})->name('dashboard');
 });
 
 
