@@ -7,7 +7,7 @@
     <meta name="description" content="eRapor SMKN 1 Krangkeng">
     <meta name="author" content="M. Ade Erik, S.Pd.">
     <!-- Bootstrap CSS -->
-    @include('layout.frontend.header') 
+    @include('layout.frontend.login.header') 
     @stack('css')
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,7 +23,7 @@
     </div>
     <!-- /.login-box -->
     <!-- Bootstrap Scripts -->
-    @include('layout.frontend.footer')   
+    @include('layout.frontend.login.footer')   
     @stack('scripts')
   </body>
 </html>

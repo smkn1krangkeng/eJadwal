@@ -1,4 +1,4 @@
-@extends('layout.frontend.main')
+@extends('layout.frontend.login.main')
 @section('judul_hal','eJadwal | Login')
 @push('css')
 <style>
