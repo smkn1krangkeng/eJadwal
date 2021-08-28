@@ -8,10 +8,11 @@
 <li class="breadcrumb-item"><a href="#">Konfigurasi</a></li>
 <li class="breadcrumb-item active">Pengguna</li>
 @endsection
-<!-- sidebar -->
+<!-- main menu sidebar -->
 @section('menu_konfig') 
 <li class="nav-item menu-open">
 @endsection
+<!-- sub menu sidebar -->
 @section('menu_pengguna')
 <a href="/pengguna" class="nav-link active">
 @endsection
