@@ -24,11 +24,11 @@ Route::group(['middleware' => ['auth']], function () {
     // role untuk yang auth
     Route::get('/dashboard', function () {return view('pages.admin');})->name('dashboard');
     
-    /* role untuk admin
+    // role untuk admin
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('/menu_admin', function () {return view('pages.menu_admin');})->name('menu_admin');
+        Route::get('/pengguna', function () {return view('pages.pengguna');})->name('pengguna');
     });
-    */
+    
 
 });
 

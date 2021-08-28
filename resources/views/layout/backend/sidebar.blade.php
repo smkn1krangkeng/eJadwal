@@ -14,7 +14,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            @sectionMissing('menu_dashboard') <a href="/dashboard" class="nav-link"> @else @yield('menu_dashboard') @endif
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -33,7 +33,27 @@
               @endhasanyrole
               </p>
             </a>
-          </li> 
+          </li>
+          <!-- menu admin -->
+          @hasanyrole('admin')
+          @sectionMissing('menu_konfig') <li class="nav-item"> @else @yield('menu_konfig') @endif
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cogs text-danger"></i>
+              <p>
+                Konfigurasi
+                <i class="right fas fa-angle-left "></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">   
+              <li class="nav-item">
+              @sectionMissing('menu_pengguna') <a href="/pengguna" class="nav-link"> @else @yield('menu_pengguna') @endif
+                  <i class="far fa-circle nav-icon text-danger"></i>
+                  <p>Pengguna</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endhasanyrole 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cogs text-danger"></i>

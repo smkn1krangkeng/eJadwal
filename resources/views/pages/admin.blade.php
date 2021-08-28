@@ -8,6 +8,9 @@
 <li class="breadcrumb-item"><a href="#">Home</a></li>
 <li class="breadcrumb-item active">Dashboard</li>
 @endsection
+@section('menu_dashboard') 
+<a href="/dashboard" class="nav-link active">
+@endsection
 @section('konten')
         <!-- Small boxes (Stat box) -->
         <div class="row">

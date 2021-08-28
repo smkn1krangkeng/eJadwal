@@ -1,5 +1,5 @@
 @extends('layout.frontend.login.main')
-@section('judul_hal','eJadwal | Login')
+@section('judul_hal','Login')
 @push('css')
 <style>
 body {

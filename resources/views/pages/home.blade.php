@@ -1,5 +1,5 @@
 @extends('layout.frontend.home.main')
-@section('judul_hal','eJadwal | Home')
+@section('judul_hal','Home')
 @push('css')
 @endpush
 @push('scripts')

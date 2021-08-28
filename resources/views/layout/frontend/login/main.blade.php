@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="eRapor SMKN 1 Krangkeng">
     <meta name="author" content="M. Ade Erik, S.Pd.">
+    <title>eJadwal | @yield('judul_hal')</title>
     <!-- Bootstrap CSS -->
     @include('layout.frontend.login.header') 
     @stack('css')
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <title>@yield('judul_hal')</title>
+    
 </head>
 
 <body class="hold-transition login-page">
