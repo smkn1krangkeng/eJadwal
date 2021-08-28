@@ -12,10 +12,13 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fas fa-sign-out-alt"></i>
-          Sign Out
-        </a>
+        <form action="/logout" method="post" id="logout">
+        @csrf
+          <a class="nav-link" href="#" onclick="document.getElementById('logout').submit()">
+            <i class="fas fa-sign-out-alt"></i>
+            Sign Out
+          </a>
+        </form>
       </li>
     </ul>
   </nav>

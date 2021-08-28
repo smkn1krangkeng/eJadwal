@@ -14,15 +14,13 @@ use App\Http\Controllers\LoginController;
 |
 */
 //frontend page
-Route::get('/', function () {
-    return view('pages.app');
-});
-Route::get('/login', [LoginController::class, 'getLogin']);
+Route::get('/', function () {return view('pages.app');})->middleware('guest');
+Route::get('/login', [LoginController::class, 'getLogin'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'postLogin']);
-
+Route::post('/logout', [LoginController::class, 'logout']);
 //backend page
-Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/admin', function () {
+Route::group(['middleware' => ['auth','role:admin']], function () {
+    Route::get('/dashboard', function () {
         return view('pages.admin');
     });
 });
