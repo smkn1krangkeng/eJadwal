@@ -1,6 +1,12 @@
 @extends('layout.frontend.main')
-@section('judul_hal','Home')
+@section('judul_hal','eJadwal | Login')
 @push('css')
+<style>
+body {
+  background: url("{{url('img/background.png')}}") top left / 100px repeat;
+  transform-origin: top;
+}
+</style>
 @endpush
 @push('scripts')
 <script>
@@ -22,9 +28,7 @@ $(document).ready(function() {
 @endif
 <div class="card card-outline card-primary">
         <div class="card-header text-center">
-        <a href="#" class="h1">
         <img src="{{url('img/logo2.png')}}" alt="eJadwal" class="" style="width:70px; height:70px">
-        </a>
         </div>
         <div class="card-body">
           <form action="/login" method="post">
@@ -50,6 +54,9 @@ $(document).ready(function() {
               <!-- /.col -->
               <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+              </div>
+              <div class="col-12 text-center mt-3">
+              <a href="/" class="stretched-link">Back to Home</a>
               </div>
               <!-- /.col -->
             </div>

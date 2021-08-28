@@ -14,7 +14,8 @@ use App\Http\Controllers\LoginController;
 |
 */
 //frontend page
-Route::get('/', function () {return view('pages.app');})->middleware('guest');
+Route::get('/', function () {return view('pages.home');});
+Route::get('/home', function () {return view('pages.home');})->name('home');
 Route::get('/login', [LoginController::class, 'getLogin'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'postLogin']);
 Route::post('/logout', [LoginController::class, 'logout']);
