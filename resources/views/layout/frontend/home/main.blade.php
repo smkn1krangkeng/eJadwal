@@ -21,8 +21,8 @@
         @yield('home5')
     </main>
     @include('layout.frontend.home.footer')    
-    @stack('scripts')
-    @include('layout.frontend.home.scripts')    
+    @include('layout.frontend.home.scripts') 
+    @stack('scripts')   
 </body>
 
 </html>

@@ -1,7 +1,58 @@
 @extends('layout.backend.main')
 @push('css')
+<!-- DataTables -->
+<link rel="stylesheet" href="{{url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{url('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 @endpush
 @push('scripts')
+<!-- DataTables  & Plugins -->
+<script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{url('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{url('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{url('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{url('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{url('plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{url('plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{url('plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{url('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{url('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{url('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<!-- table setting -->
+<script>
+  $(function () {
+    $('#users-table').DataTable({
+      "paging": true,
+      "pageLength": 10,
+      "lengthChange": true,
+      "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+      "searching": true,
+      "ordering": true,
+      "autoWidth": false,
+      "responsive": true,
+      "columnDefs": [
+        { "orderable": false, "targets": 3 },
+        { "searchable": false, "targets": 3 }
+      ],
+      dom: 'Bfrtip',
+      buttons: [
+          'excel',
+          {
+            extend:    'print',
+            text:      'Print',
+            exportOptions: {
+                        columns: [ 0, 1, 2  ],
+                        orthogonal: {
+                                display: ':null'
+                        }
+                    },
+            titleAttr: 'PRINT'
+          }
+      ]
+    });
+  });
+</script>
 @endpush
 @section('judul_hal','Pengguna')
 @section('header_hal')
@@ -41,12 +92,13 @@
               @php
                   $no = 1;
               @endphp
-              <table class="table table-sm table-bordered table-hover">
-                <thead class="bg-light">
+              <table id="users-table" class="table table-sm table-hover table-bordered">
+                <thead class="bg-dark">
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -55,6 +107,14 @@
                     <th scope="row">{{ $no++ }}</th>
                     <td>{{$r->name}}</td>
                     <td>{{$r->email}}</td>
+                    <td>
+                      <a class="btn btn-primary mx-2" href="#" role="button">
+                      <i class="fas fa-edit"></i>
+                      </a>
+                      <a class="btn btn-danger mx-2" href="#" role="button">
+                      <i class="fas fa-trash-alt"></i>
+                      </a>
+                    </td>
                   </tr>
                 @endforeach
                 </tbody>

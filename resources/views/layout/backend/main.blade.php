@@ -61,7 +61,7 @@
 </div>
 <!-- ./wrapper -->
 
-@stack('scripts')
-@include('layout.backend.scripts') 
+@include('layout.backend.scripts')
+@stack('scripts') 
 </body>
 </html>
