@@ -34,21 +34,6 @@
       "columnDefs": [
         { "orderable": false, "targets": 3 },
         { "searchable": false, "targets": 3 }
-      ],
-      dom: 'Bfrtip',
-      buttons: [
-          'excel',
-          {
-            extend:    'print',
-            text:      'Print',
-            exportOptions: {
-                        columns: [ 0, 1, 2  ],
-                        orthogonal: {
-                                display: ':null'
-                        }
-                    },
-            titleAttr: 'PRINT'
-          }
       ]
     });
   });
@@ -92,12 +77,14 @@
               @php
                   $no = 1;
               @endphp
-              <table id="users-table" class="table table-sm table-hover table-bordered">
+              <table id="users-table" class="table table-hover table-bordered">
                 <thead class="bg-dark">
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Roles</th>
+                    <th scope="col">Permissions</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -107,6 +94,16 @@
                     <th scope="row">{{ $no++ }}</th>
                     <td>{{$r->name}}</td>
                     <td>{{$r->email}}</td>
+                    <td>
+                      @foreach(($r->roles) as $roles) 
+                      {{$roles->name}} 
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach(($r->permissions) as $permis) 
+                      {{$permis->name}} 
+                      @endforeach
+                    </td>
                     <td>
                       <a class="btn btn-primary mx-2" href="#" role="button">
                       <i class="fas fa-edit"></i>

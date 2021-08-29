@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\PermissionRegistrar;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 
 class UserSeeder extends Seeder
@@ -21,6 +24,8 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
         $admin->assignRole('admin');
+        //$admin->givePermissionTo(['create.*','read.*', 'update.*','delete.*']);
+        $admin->givePermissionTo(Permission::all());
 
         $user = User::create(
         [
