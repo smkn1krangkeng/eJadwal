@@ -38,9 +38,27 @@
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
-                  ini konten
-                  <br>
-                  {{ cobahelper() }}
+              @php
+                  $no = 1;
+              @endphp
+              <table class="table table-sm table-bordered table-hover">
+                <thead class="bg-light">
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach($users as $r)
+                  <tr>
+                    <th scope="row">{{ $no++ }}</th>
+                    <td>{{$r->name}}</td>
+                    <td>{{$r->email}}</td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
               </div><!-- /.card-body -->
             </div>
             <!-- /.card -->

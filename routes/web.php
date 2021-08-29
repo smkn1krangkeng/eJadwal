@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PenggunaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     // role untuk admin
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('/pengguna', function () {return view('pages.pengguna');})->name('pengguna');
+        Route::get('/pengguna', [PenggunaController::class, 'index'] )->name('pengguna.index');
     });
     
 
