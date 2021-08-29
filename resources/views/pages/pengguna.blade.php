@@ -77,8 +77,8 @@
               @php
                   $no = 1;
               @endphp
-              <table id="users-table" class="table table-hover table-bordered">
-                <thead class="bg-dark">
+              <table id="users-table" class="table table-hover">
+                <thead class="thead-dark">
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col">Nama</th>
