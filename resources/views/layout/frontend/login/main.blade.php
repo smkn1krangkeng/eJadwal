@@ -10,8 +10,6 @@
     <!-- Bootstrap CSS -->
     @include('layout.frontend.login.header') 
     @stack('css')
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
 </head>
 

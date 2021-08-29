@@ -32,8 +32,8 @@
       "autoWidth": false,
       "responsive": true,
       "columnDefs": [
-        { "orderable": false, "targets": 3 },
-        { "searchable": false, "targets": 3 }
+        { "orderable": false, "targets": [4,5] },
+        { "searchable": false, "targets": 5 }
       ]
     });
   });

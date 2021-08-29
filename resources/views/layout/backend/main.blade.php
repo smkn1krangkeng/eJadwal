@@ -7,6 +7,8 @@
   @include('layout.backend.style') 
   @include('layout.backend.header') 
   @stack('css')
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{url('css/app.css')}}">
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
