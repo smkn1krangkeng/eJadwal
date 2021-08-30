@@ -79,7 +79,6 @@
                   <i class="fas fa-file-excel"></i>
                   </a>
                 </div>
-              {{ $users_count }}
               @php
                   $no = 1;
               @endphp

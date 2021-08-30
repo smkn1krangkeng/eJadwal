@@ -22,7 +22,6 @@ class PenggunaController extends Controller
         // $data['title'] = 'Ini Judul';
         // return view('pages.pengguna',$data);
         $data['users'] = User::with('roles')->with('permissions')->get();
-        $data['users_count'] = User::with('roles')->with('permissions')->count();
         return view('pages.pengguna.index',$data);
     }
     public function excel_export() 
