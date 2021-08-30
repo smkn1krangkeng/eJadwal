@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Spatie Permission
         Spatie\Permission\PermissionServiceProvider::class,
+        //excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -230,6 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        //excel
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

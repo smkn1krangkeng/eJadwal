@@ -59,7 +59,7 @@
           <!-- Left col -->
           <section class="col-lg-12 connectedSortable">
             <!-- Custom tabs (Charts with tabs)-->
-            <div class="card">
+            <div class="card card-outline card-dark">
               <div class="card-header">
                 <h3 class="card-title">
                   Pengguna
@@ -74,6 +74,12 @@
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
+                <div class="divider bg-dark rounded mb-4">
+                  <a class="btn btn-success m-2" href="/pengguna/export" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
+                  <i class="fas fa-file-excel"></i>
+                  </a>
+                </div>
+              {{ $users_count }}
               @php
                   $no = 1;
               @endphp
@@ -105,10 +111,10 @@
                       @endforeach
                     </td>
                     <td>
-                      <a class="btn btn-primary mx-2" href="#" role="button">
+                      <a class="btn btn-primary mx-2" href="#" role="button" data-toggle="tooltip" data-placement="top" title="Edit Data">
                       <i class="fas fa-edit"></i>
                       </a>
-                      <a class="btn btn-danger mx-2" href="#" role="button">
+                      <a class="btn btn-danger mx-2" href="#" role="button" data-toggle="tooltip" data-placement="top" title="Delete Data">
                       <i class="fas fa-trash-alt"></i>
                       </a>
                     </td>

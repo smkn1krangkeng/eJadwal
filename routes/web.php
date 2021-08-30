@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenggunaController;
 
 /*
@@ -23,11 +24,12 @@ Route::post('/logout', [LoginController::class, 'logout']);
 //backend page
 Route::group(['middleware' => ['auth']], function () {
     // role untuk yang auth
-    Route::get('/dashboard', function () {return view('pages.admin');})->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'] )->name('dashboard');
     
     // role untuk admin
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/pengguna', [PenggunaController::class, 'index'] )->name('pengguna.index');
+        Route::get('/pengguna/export', [PenggunaController::class, 'excel_export'] )->name('pengguna.export');
     });
     
 
