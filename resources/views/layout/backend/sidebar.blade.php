@@ -1,11 +1,32 @@
 <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="user-panel mt-1 pb-2 pt-1 d-flex">
         <div class="image">
           <img src="{{url('dist/img/avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{auth()->user()->name}}</a>
+          <a href="#" class="d-block">
+            {{auth()->user()->name}}
+          </a>
+        </div>
+      </div>
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-1 pb-2 pt-1 d-flex">
+        <div class="image ">
+          <img src="{{url('dist/img/gembok.png')}}" class="rounded">
+        </div>
+        <div class="info">
+          <div class="d-block text-light">
+            <span class="badge badge-info">  
+              Login As 
+              @hasanyrole('admin')
+              Admin
+              @endhasanyrole
+              @hasanyrole('gurumapel')
+              Guru Mapel
+              @endhasanyrole
+            </span>
+          </div>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -15,8 +36,8 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cog text-warning"></i>
-              <p>
+              <i class="nav-icon fas fa-user-tie text-primary"></i>
+              <p class="text-primary">
               @hasanyrole('admin')
               Menu Admin
               @endhasanyrole
