@@ -28,4 +28,22 @@ class PenggunaController extends Controller
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
+    
+    public function destroy($id)
+    {
+            dd($id);
+    }
+    
+    public function update(Request $request,$id)
+    {
+            dd($id);
+    }
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        dd($ids);
+    }
+
+
 }
