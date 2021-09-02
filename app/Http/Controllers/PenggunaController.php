@@ -41,7 +41,7 @@ class PenggunaController extends Controller
 
     public function deleteAll(Request $request)
     {
-        $ids = $request->userid;
+        $ids = explode(",",$request->userids);
         dd($ids);
     }
 
