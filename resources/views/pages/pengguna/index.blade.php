@@ -100,14 +100,10 @@
                     <td>{{$r->name}}</td>
                     <td>{{$r->email}}</td>
                     <td>
-                      @foreach(($r->roles) as $roles) 
-                      {{$roles->name}} 
-                      @endforeach
+                      {{$r->roles->pluck('name')->implode(',')}} 
                     </td>
                     <td>
-                      @foreach(($r->permissions) as $permis) 
-                      {{$permis->name}} 
-                      @endforeach
+                      {{$r->permissions->pluck('name')->implode(',')}} 
                     </td>
                     <td>
                       <a class="btn btn-primary mx-2" href="#" role="button" data-toggle="tooltip" data-placement="top" title="Edit Data">
