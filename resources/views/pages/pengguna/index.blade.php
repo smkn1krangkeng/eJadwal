@@ -91,56 +91,62 @@
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
+              <form action="{{ route('pengguna.delall') }}" method="post" class="d-inline mx-1" id="delall" enctype="multipart/form-data">
+                @csrf
+                @method('DELETE')  
                 <div class="divider bg-dark rounded mb-4">
                   <a class="btn btn-success m-2" href="/pengguna/export" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
                   <i class="fas fa-file-excel"></i>
                   </a>
-                  <button class="btn btn-primary delete_all" data-url="#">Delete All Selected</button>
+                  <input type="checkbox" class="sub_chk" name="userid[]" value="1">
+                  <input type="checkbox" class="sub_chk" name="userid[]" value="2">
+                  <button type="submit" class="btn btn-danger">Delete All</button>
                 </div>
-              @php
-                  $no = 1;
-              @endphp
-              <table id="users-table" class="table table-hover">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col"><input type="checkbox" id="master"></th></th>
-                    <th scope="col">No</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Roles</th>
-                    <th scope="col">Permissions</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                @foreach($users as $r)
-                  <tr id="tr_{{$r->id}}"> 
-                    <td><input type="checkbox" class="sub_chk" data-id="{{$r->id}}"></td>
-                    <th scope="row">{{ $no++ }}</th>
-                    <td>{{$r->name}}</td>
-                    <td>{{$r->email}}</td>
-                    <td>
-                      {{$r->roles->pluck('name')->implode(',')}} 
-                    </td>
-                    <td>
-                      {{$r->permissions->pluck('name')->implode(',')}} 
-                    </td>
-                    <td>
-                    <form action="{{ route('pengguna.edit', $r->id) }}" method="post" class="d-inline mx-1">
-                      @csrf
-                      @method('PUT')
-                          <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                    </form>
-                    <form action="{{ route('pengguna.del', $r->id) }}" method="post" class="d-inline mx-1">
-                      @csrf
-                      @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                    </td>
-                  </tr>
-                @endforeach
-                </tbody>
-              </table>
+                </form>
+                @php
+                    $no = 1;
+                @endphp
+                <table id="users-table" class="table table-hover">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col"><input type="checkbox" id="master"></th>
+                      <th scope="col">No</th>
+                      <th scope="col">Nama</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Roles</th>
+                      <th scope="col">Permissions</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($users as $r)
+                    <tr> 
+                      <td><input type="checkbox" class="sub_chk" name="userid[]" value="{{$r->id}}"></td>
+                      <th scope="row">{{ $no++ }}</th>
+                      <td>{{$r->name}}</td>
+                      <td>{{$r->email}}</td>
+                      <td>
+                        {{$r->roles->pluck('name')->implode(',')}} 
+                      </td>
+                      <td>
+                        {{$r->permissions->pluck('name')->implode(',')}} 
+                      </td>
+                      <td>
+                        <form action="{{ route('pengguna.edit', $r->id) }}" method="post" class="d-inline mx-1" id="edituser">
+                          @csrf
+                          @method('PUT')
+                              <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                        </form>
+                        <form action="{{ route('pengguna.del', $r->id) }}" method="post" class="d-inline mx-1" id="deluser">
+                          @csrf
+                          @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                      </td>
+                    </tr>
+                  @endforeach
+                  </tbody>
+                </table>
               </div><!-- /.card-body -->
             </div>
             <!-- /.card -->
