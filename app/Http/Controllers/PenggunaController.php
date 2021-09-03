@@ -46,9 +46,15 @@ class PenggunaController extends Controller
     {
         //dd($request->userids);
         $ids = explode(",",$request->userids);
+        
+        //fungsi untuk foreach
+        function eksekusi($id){
+            print_r($id."<br>");
+        }
+
         foreach($ids as $rid){
             $id=Crypt::decryptString($rid);
-            print_r($id."<br>");
+            eksekusi($id);
         }
     }
 
