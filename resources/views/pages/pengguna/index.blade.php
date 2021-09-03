@@ -70,11 +70,15 @@
     $(document).ready(function() {
         $("#delselbtn").click(function(){
             var ids = [];
+            var names = [];
             $.each($("input[name='userids']:checked"), function(){
                 ids.push($(this).val());
+                names.push($(this).data('name'));
             });
             var x = ids.join(",");
+            var y = names.join(",");
             document.getElementById("checkids").value = x;
+            document.getElementById("namesid").innerHTML = y;
         });
     });
 </script>
@@ -113,17 +117,20 @@
                   </button>
                 </div>
               </div><!-- /.card-header -->
+              <form action="{{ route('pengguna.delsel') }}" method="post" class="d-inline mx-1">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" id="checkids" name="userids">
+                    @php echo mymodal("modal-delsel","Confirmation","Apakah anda yakin ingin menghapus data berikut ini ? <div id='namesid'></div> ","Delete","danger") @endphp
+              </form>
               <div class="card-body">
                 <div class="divider bg-dark rounded mb-4">
                   <a class="btn btn-success m-2" href="/pengguna/export" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
                   <i class="fas fa-file-excel"></i>
                   </a>
-                  <form action="{{ route('pengguna.delsel') }}" method="post" class="d-inline mx-1">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" id="checkids" name="userids">
-                    <button type="submit" id="delselbtn" class="btn btn-danger">Delete Selected</button>
-                  </form>
+                  <button type="button" id="delselbtn" class="btn btn-danger" data-toggle="modal" data-target="#modal-delsel">
+                    Delete Selection
+                  </button>
                 </div>
                 @php
                     $no = 1;
@@ -143,7 +150,7 @@
                   <tbody>
                   @foreach($users as $r)
                     <tr> 
-                      <td><input type="checkbox" class="sub_chk" name="userids" value="{{Crypt::encryptString($r->id)}}"></td>
+                      <td><input type="checkbox" class="sub_chk" name="userids" value="{{Crypt::encryptString($r->id)}}" data-name="{{$r->name}}"></td>
                       <th scope="row">{{ $no++ }}</th>
                       <td>{{$r->name}}</td>
                       <td>{{$r->email}}</td>
@@ -162,8 +169,11 @@
                         <form action="{{ route('pengguna.del', Crypt::encryptString($r->id)) }}" method="post" class="d-inline mx-1">
                           @csrf
                           @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                          @php echo mymodal("modal-del-{$r->id}","Confirmation","Apakah anda yakin ingin menghapus {$r->name}","Delete","danger") @endphp
                         </form>
+                        <button type="button" id="del-{{$r->id}}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-del-{{$r->id}}">
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   @endforeach
