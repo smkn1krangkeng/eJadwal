@@ -44,17 +44,17 @@ class PenggunaController extends Controller
 
     public function deleteSel(Request $request)
     {
-        //dd($request->userids);
-        $ids = explode(",",$request->userids);
-        $nids = collect($ids);
-        $count= $nids->filter()->count();
-        //dd($count);
+        $ids = explode(",",$request->userids); //membuat array
+        $nids = collect($ids); //membuat collection array
+        $rids = collect($ids)->filter()->all(); //memfilter array
+        $count= $nids->filter()->count(); //menghitung panjang array
+
         //fungsi untuk foreach
         function eksekusi($id){
             print_r($id."<br>");
         }
         if ($count>0){
-            foreach($ids as $rid){
+            foreach($rids as $rid){
                 $id=Crypt::decryptString($rid);
                 eksekusi($id);
             }
