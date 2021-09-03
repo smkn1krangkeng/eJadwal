@@ -7,25 +7,22 @@ body {
   transform-origin: top;
 }
 </style>
+<link rel="stylesheet" href="{{url('plugins/toastr/toastr.css')}}">
 @endpush
 @push('scripts')
+<script src="{{url('plugins/toastr/toastr.min.js')}}"></script>
 <script>
-$(document).ready(function() {
-  $(".alert-dismissible").fadeTo(2000, 500).slideUp(500, function(){
-      $(".alert-dismissible").alert('close');
-  });
-});
+  @if(Session::has('loginError'))
+    toastr.options =
+    {
+      "closeButton" : true,
+      "progressBar" : true
+    }
+  	toastr.error("{{ session('loginError') }}");
+  @endif
 </script>
 @endpush
 @section('login_form')
-@if(session()->has('loginError'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  {{session('loginError')}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-@endif
 <div class="card card-outline card-primary">
         <div class="card-header text-center">
         <img src="{{url('img/logo2.png')}}" alt="eJadwal" class="" style="width:70px; height:70px">

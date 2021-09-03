@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{url('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{url('plugins/toastr/toastr.css')}}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
 @push('scripts')
@@ -21,6 +22,17 @@
 <script src="{{url('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{url('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 <!-- table setting -->
+<script src="{{url('plugins/toastr/toastr.min.js')}}"></script>
+<script>
+  @if(Session::has('error'))
+    toastr.options =
+    {
+      "closeButton" : true,
+      "progressBar" : true
+    }
+  	toastr.error("{{ session('error') }}");
+  @endif
+</script>
 <script>
   $(function () {
     $('#users-table').DataTable({
@@ -81,7 +93,7 @@
 <a href="/pengguna" class="nav-link active">
 @endsection
 
-@section('konten')      
+@section('konten')  
         <!-- Main row -->
         <div class="row">
           <!-- Left col -->

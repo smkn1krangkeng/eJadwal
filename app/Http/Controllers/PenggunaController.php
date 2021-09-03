@@ -46,15 +46,20 @@ class PenggunaController extends Controller
     {
         //dd($request->userids);
         $ids = explode(",",$request->userids);
-        
+        $nids = collect($ids);
+        $count= $nids->filter()->count();
+        //dd($count);
         //fungsi untuk foreach
         function eksekusi($id){
             print_r($id."<br>");
         }
-
-        foreach($ids as $rid){
-            $id=Crypt::decryptString($rid);
-            eksekusi($id);
+        if ($count>0){
+            foreach($ids as $rid){
+                $id=Crypt::decryptString($rid);
+                eksekusi($id);
+            }
+        }else{
+            return back()->with('error','Tidak ada data yang dipilih');
         }
     }
 
