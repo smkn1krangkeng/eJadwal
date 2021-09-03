@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use Excel;
 use App\Exports\UsersExport;
+use Illuminate\Support\Facades\Crypt;
 
 class PenggunaController extends Controller
 {
@@ -31,18 +32,24 @@ class PenggunaController extends Controller
     
     public function destroy($id)
     {
-            dd($id);
+        $id=Crypt::decryptString($id);    
+        dd($id);
     }
     
     public function update(Request $request,$id)
     {
-            dd($id);
+        $id=Crypt::decryptString($id);    
+        dd($id);
     }
 
-    public function deleteAll(Request $request)
+    public function deleteSel(Request $request)
     {
+        //dd($request->userids);
         $ids = explode(",",$request->userids);
-        dd($ids);
+        foreach($ids as $rid){
+            $id=Crypt::decryptString($rid);
+            print_r($id."<br>");
+        }
     }
 
 

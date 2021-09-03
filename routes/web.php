@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/pengguna/export', [PenggunaController::class, 'excel_export'] )->name('pengguna.export');
         Route::put('/pengguna/edit/{id}', [PenggunaController::class, 'update'])->name('pengguna.edit');
         Route::delete('/pengguna/del/{id}', [PenggunaController::class, 'destroy'])->name('pengguna.del');
-        Route::delete('/penggunas/DeleteAll', [PenggunaController::class, 'deleteAll'])->name('pengguna.delall');
+        Route::delete('/penggunas/delSel', [PenggunaController::class, 'deleteSel'])->name('pengguna.delsel');
     });
     
 

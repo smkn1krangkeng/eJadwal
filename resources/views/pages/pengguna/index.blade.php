@@ -56,7 +56,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        $("button").click(function(){
+        $("#delselbtn").click(function(){
             var ids = [];
             $.each($("input[name='userids']:checked"), function(){
                 ids.push($(this).val());
@@ -106,11 +106,11 @@
                   <a class="btn btn-success m-2" href="/pengguna/export" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
                   <i class="fas fa-file-excel"></i>
                   </a>
-                  <form action="{{ route('pengguna.delall') }}" method="post" class="d-inline mx-1">
+                  <form action="{{ route('pengguna.delsel') }}" method="post" class="d-inline mx-1">
                     @csrf
                     @method('DELETE')
                     <input type="hidden" id="checkids" name="userids">
-                    <button type="submit" id="delallbtn" class="btn btn-danger">Delete Selected</button>
+                    <button type="submit" id="delselbtn" class="btn btn-danger">Delete Selected</button>
                   </form>
                 </div>
                 @php
@@ -131,7 +131,7 @@
                   <tbody>
                   @foreach($users as $r)
                     <tr> 
-                      <td><input type="checkbox" class="sub_chk" name="userids" value="{{$r->id}}"></td>
+                      <td><input type="checkbox" class="sub_chk" name="userids" value="{{Crypt::encryptString($r->id)}}"></td>
                       <th scope="row">{{ $no++ }}</th>
                       <td>{{$r->name}}</td>
                       <td>{{$r->email}}</td>
@@ -142,12 +142,12 @@
                         {{$r->permissions->pluck('name')->implode(',')}} 
                       </td>
                       <td>
-                        <form action="{{ route('pengguna.edit', $r->id) }}" method="post" class="d-inline mx-1" id="edituser">
+                        <form action="{{ route('pengguna.edit', Crypt::encryptString($r->id)) }}" method="post" class="d-inline mx-1">
                           @csrf
                           @method('PUT')
                               <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                         </form>
-                        <form action="{{ route('pengguna.del', $r->id) }}" method="post" class="d-inline mx-1" id="deluser">
+                        <form action="{{ route('pengguna.del', Crypt::encryptString($r->id)) }}" method="post" class="d-inline mx-1">
                           @csrf
                           @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
