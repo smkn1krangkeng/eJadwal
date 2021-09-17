@@ -121,7 +121,7 @@
                     @csrf
                     @method('DELETE')
                     <input type="hidden" id="checkids" name="userids">
-                    @php echo mymodal("modal-delsel","Confirmation","Apakah anda yakin ingin menghapus data berikut ini ? <div id='namesid'></div> ","Delete","danger") @endphp
+                    <x-modal name="delsel" target="modal-delsel" title="Confirmation" message="Apakah anda yakin ingin menghapus data berikut ini ?" divid="namesid" tombol="Delete" jenis="danger" />
               </form>
               <div class="card-body">
                 <div class="divider bg-dark rounded mb-4">
@@ -168,8 +168,8 @@
                         </form>
                         <form action="{{ route('pengguna.del', Crypt::encryptString($r->id)) }}" method="post" class="d-inline mx-1">
                           @csrf
-                          @method('DELETE')
-                          @php echo mymodal("modal-del-{$r->id}","Confirmation","Apakah anda yakin ingin menghapus {$r->name}","Delete","danger") @endphp
+                          @method('DELETE')                      
+                          <x-modal name="deluser" target="modal-del-{{$r->id}}" title="Confirmation" message="Apakah anda yakin ingin menghapus {{$r->name}}" divid="{{$r->name}}" tombol="Delete" jenis="danger" />
                         </form>
                         <button type="button" id="del-{{$r->id}}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-del-{{$r->id}}">
                           Delete
