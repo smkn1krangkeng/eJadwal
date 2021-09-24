@@ -1,8 +1,24 @@
 @extends('layout.backend.main')
 @push('css')
 <link rel="stylesheet" href="{{url('plugins/toastr/toastr.css')}}">
+<!-- Select2 -->
+<link rel="stylesheet" href="{{url('plugins/select2/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{url('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 @endpush
 @push('scripts')
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<script>
+  $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+      theme: 'bootstrap4'
+      })
+  })
+</script>
+<!--toastr-->
 <script src="{{url('plugins/toastr/toastr.min.js')}}"></script>
 <script>
   @if(Session::has('error'))
@@ -84,7 +100,21 @@
                       <input type="text" value="{{$user->permissions->pluck('name')->implode(',')}}" class="form-control" id="permission" placeholder="Permission ...">
                     </div>
                 </div>
-                  <a href="/pengguna" class="btn btn-default ">Cancel</a>
+                <div class="form-group">
+                  <label>Multiple (.select2-purple)</label>
+                  <div class="select2-blue">
+                    <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-blue" style="width: 100%;">
+                      <option>Alabama</option>
+                      <option>Alaska</option>
+                      <option>California</option>
+                      <option>Delaware</option>
+                      <option>Tennessee</option>
+                      <option>Texas</option>
+                      <option>Washington</option>
+                    </select>
+                  </div>
+                </div>
+                  <a href="/pengguna" class="btn btn-default gt">Cancel</a>
                   <button type="submit" class="btn btn-info float-right ">Update</button>
               </form>
               </div><!-- /.card-body -->
