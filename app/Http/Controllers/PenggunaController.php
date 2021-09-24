@@ -36,10 +36,12 @@ class PenggunaController extends Controller
         dd($id);
     }
     
-    public function update(Request $request,$id)
+    public function edit(Request $request,$id)
     {
         $id=Crypt::decryptString($id);    
-        dd($id);
+        //dd($id);
+        $data['user'] = User::with('roles')->with('permissions')->where('id', $id)->first();
+        return view('pages.pengguna.edit',$data);
     }
 
     public function deleteSel(Request $request)

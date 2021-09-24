@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/pengguna', [PenggunaController::class, 'index'] )->name('pengguna.index');
         Route::get('/pengguna/export', [PenggunaController::class, 'excel_export'] )->name('pengguna.export');
-        Route::put('/pengguna/edit/{id}', [PenggunaController::class, 'update'])->name('pengguna.edit');
+        Route::put('/pengguna/edit/{id}', [PenggunaController::class, 'edit'])->name('pengguna.edit');
         Route::delete('/pengguna/del/{id}', [PenggunaController::class, 'destroy'])->name('pengguna.del');
         Route::delete('/penggunas/delSel', [PenggunaController::class, 'deleteSel'])->name('pengguna.delsel');
     });
