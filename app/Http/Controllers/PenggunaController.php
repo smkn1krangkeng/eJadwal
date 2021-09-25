@@ -35,7 +35,9 @@ class PenggunaController extends Controller
     public function destroy($id)
     {
         $id=Crypt::decryptString($id);    
-        dd($id);
+        //dd($id);
+        User::where('id',$id)->delete();
+        return redirect()->route('pengguna.index')->with('success','Delete Success');
     }
     
     public function edit($id)
@@ -92,13 +94,14 @@ class PenggunaController extends Controller
 
         //fungsi untuk foreach
         function eksekusi($id){
-            print_r($id."<br>");
+            User::where('id',$id)->delete();
         }
         if ($count>0){
             foreach($rids as $rid){
                 $id=Crypt::decryptString($rid);
                 eksekusi($id);
             }
+            return redirect()->route('pengguna.index')->with('success','Delete Success');
         }else{
             return back()->with('error','Tidak ada data yang dipilih');
         }
