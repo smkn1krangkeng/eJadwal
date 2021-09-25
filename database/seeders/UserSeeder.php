@@ -24,8 +24,8 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
         $admin->assignRole('admin');
-        //$admin->givePermissionTo(['create.*','read.*', 'update.*','delete.*']);
-        $admin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo(['create.*','read.*', 'update.*','delete.*']);
+        //$admin->givePermissionTo(Permission::all());
 
         $user = User::create(
         [

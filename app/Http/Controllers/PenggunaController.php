@@ -9,6 +9,8 @@ use App\Models\User;
 use Excel;
 use App\Exports\UsersExport;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Arr;
 
 class PenggunaController extends Controller
 {
@@ -36,12 +38,48 @@ class PenggunaController extends Controller
         dd($id);
     }
     
-    public function edit(Request $request,$id)
+    public function edit($id)
     {
         $id=Crypt::decryptString($id);    
         //dd($id);
         $data['user'] = User::with('roles')->with('permissions')->where('id', $id)->first();
+        $data['roles']= Role::all();
+        $data['permission']= Permission::all();
         return view('pages.pengguna.edit',$data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $id=Crypt::decryptString($id);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'nullable|min:6',
+            'roles' => 'required',
+            'permissions' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->with('error','Update Failed')->withInput();
+        }
+        //filter password yg kosong
+        $array = collect( $request->all() )->filter()->all();
+        //ambil array name, email, dan password
+        $slice1 = Arr::only($array, ['name', 'email','password']);
+        //ambil data role dan permission
+        $slice2 = Arr::only($array, ['roles', 'permissions']);
+        //ambil data role user
+        $user_roles = Arr::get($slice2, 'roles');
+        //ambil data permission user
+        $user_permissions = Arr::get($slice2, 'permissions');
+
+        //update data
+        $user = User::find($id);
+        $user->update($slice1);
+        $user->syncRoles($user_roles);
+        $user->syncPermissions($user_permissions);
+        
+        return redirect()->route('pengguna.index')->with('success','Update Success');
     }
 
     public function deleteSel(Request $request)

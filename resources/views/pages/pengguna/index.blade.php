@@ -32,6 +32,14 @@
     }
   	toastr.error("{{ session('error') }}");
   @endif
+  @if(Session::has('success'))
+    toastr.options =
+    {
+      "closeButton" : true,
+      "progressBar" : true
+    }
+  	toastr.success("{{ session('success') }}");
+  @endif
 </script>
 <script>
   $(function () {
@@ -163,7 +171,7 @@
                       <td>
                         <form action="{{ route('pengguna.edit', Crypt::encryptString($r->id)) }}" method="post" class="d-inline mx-1">
                           @csrf
-                          @method('PUT')
+                          @method('GET')
                               <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                         </form>
                         <form action="{{ route('pengguna.del', Crypt::encryptString($r->id)) }}" method="post" class="d-inline mx-1">

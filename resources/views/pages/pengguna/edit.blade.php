@@ -12,6 +12,7 @@
   $(function () {
       //Initialize Select2 Elements
       $('.select2').select2()
+      $('.select2-selection').css('border-color','#DEE2E6');
       //Initialize Select2 Elements
       $('.select2bs4').select2({
       theme: 'bootstrap4'
@@ -67,52 +68,59 @@
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
-              <form method="POST" action="">
+              <form method="POST" action="{{ route('pengguna.update', Crypt::encryptString($user->id)) }}">
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                      <input type="text" value="{{$user->name}}"class="form-control" id="name" placeholder="Name ...">
+                      <input type="text" name="name" value="{{ old('name') ?? $user->name }}"class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name ...">
+                      @error('name')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                      @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                      <input type="email" value="{{$user->email}}"class="form-control" id="email" placeholder="Email ...">
+                      <input type="email" name="email" value="{{ old('email') ?? $user->email }}"class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email ...">
+                      @error('email')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                      @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" id="password" placeholder="Password ...">
+                      <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password ...">
+                      @error('password')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                      @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="roles" class="col-sm-2 col-form-label">Roles</label>
-                    <div class="col-sm-10">
-                      <input type="text" value="{{$user->roles->pluck('name')->implode(',')}}" class="form-control" id="roles" placeholder="Roles ...">
+                    <div class="col-sm-10 select2-blue">
+                      <select class="select2 form-control" name="roles[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
+                      @foreach($roles as $r)
+                      <option value="{{$r->name}}"
+                        {{in_array($r->name,$user->roles->pluck('name')->toArray())?' selected="selected" ':''}}
+                      >{{$r->name}}</option>
+                      @endforeach
+                      </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="permission" class="col-sm-2 col-form-label">Permission</label>
-                    <div class="col-sm-10">
-                      <input type="text" value="{{$user->permissions->pluck('name')->implode(',')}}" class="form-control" id="permission" placeholder="Permission ...">
+                    <div class="col-sm-10 select2-blue">
+                      <select class="select2 border border-color-primary" name="permissions[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
+                      @foreach($permission as $p)
+                      <option value="{{$p->name}}"
+                        {{in_array($p->name,$user->permissions->pluck('name')->toArray())?' selected="selected" ':''}}
+                      >{{$p->name}}</option>
+                      @endforeach
+                      </select>
                     </div>
-                </div>
-                <div class="form-group">
-                  <label>Multiple (.select2-purple)</label>
-                  <div class="select2-blue">
-                    <select class="select2" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-blue" style="width: 100%;">
-                      <option>Alabama</option>
-                      <option>Alaska</option>
-                      <option>California</option>
-                      <option>Delaware</option>
-                      <option>Tennessee</option>
-                      <option>Texas</option>
-                      <option>Washington</option>
-                    </select>
-                  </div>
                 </div>
                   <a href="/pengguna" class="btn btn-default gt">Cancel</a>
                   <button type="submit" class="btn btn-info float-right ">Update</button>
