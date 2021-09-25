@@ -71,6 +71,7 @@ class PenggunaController extends Controller
         //ambil data role user
         $user_roles = Arr::get($slice2, 'roles');
         //ambil data permission user
+        //dd($user_roles);
         $user_permissions = Arr::get($slice2, 'permissions');
 
         //update data

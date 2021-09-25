@@ -101,11 +101,14 @@
                 <div class="form-group row">
                     <label for="roles" class="col-sm-2 col-form-label">Roles</label>
                     <div class="col-sm-10 select2-blue">
+                      @php
+                          $old_roles = (old('_token') !== null) ? collect(old('roles')) : $user->roles->pluck('name');
+                      @endphp
                       <select class="select2 form-control @error('roles') is-invalid @enderror" name="roles[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
                       @foreach($roles as $r)
-                      <option value="{{$r->name}}"
-                        {{in_array( $r->name , old('roles', $user->roles->pluck('name')->toArray()) )?' selected="selected" ':''}}
-                      >{{$r->name}}</option>
+                        <option value="{{$r->name}}"
+                        {{in_array( $r->name, $old_roles->toArray() ) ? ' selected="selected" ':''}}
+                        >{{$r->name}}</option>
                       @endforeach
                       </select>
                       @error('roles')
@@ -116,10 +119,13 @@
                 <div class="form-group row">
                     <label for="permission" class="col-sm-2 col-form-label">Permission</label>
                     <div class="col-sm-10 select2-blue">
+                      @php
+                          $old_permissions = (old('_token') !== null) ? collect(old('permissions')) : $user->permissions->pluck('name');
+                      @endphp
                       <select class="select2 form-control @error('permissions') is-invalid @enderror" name="permissions[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
                       @foreach($permission as $p)
                       <option value="{{$p->name}}"
-                        {{in_array( $p->name, old('permissions', $user->permissions->pluck('name')->toArray()) )?' selected="selected" ':''}}
+                        {{in_array( $p->name, $old_permissions->toArray() )?' selected="selected" ':''}}
                       >{{$p->name}}</option>
                       @endforeach
                       </select>
