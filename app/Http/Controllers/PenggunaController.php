@@ -56,7 +56,7 @@ class PenggunaController extends Controller
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'nullable|min:6',
             'roles' => 'required',
-            'permissions' => 'required',
+            'permissions' => 'nullable',
         ]);
 
         if ($validator->fails()) {

@@ -74,7 +74,7 @@
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                      <input type="text" name="name" value="{{ old('name') ?? $user->name }}"class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name ...">
+                      <input type="text" name="name" value="{{ old('name',$user->name) }}"class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name ...">
                       @error('name')
                         <span class="invalid-feedback">{{ $message }}</span>
                       @enderror
@@ -83,7 +83,7 @@
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                      <input type="email" name="email" value="{{ old('email') ?? $user->email }}"class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email ...">
+                      <input type="email" name="email" value="{{ old('email',$user->email) }}"class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email ...">
                       @error('email')
                         <span class="invalid-feedback">{{ $message }}</span>
                       @enderror
@@ -101,22 +101,25 @@
                 <div class="form-group row">
                     <label for="roles" class="col-sm-2 col-form-label">Roles</label>
                     <div class="col-sm-10 select2-blue">
-                      <select class="select2 form-control" name="roles[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
+                      <select class="select2 form-control @error('roles') is-invalid @enderror" name="roles[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
                       @foreach($roles as $r)
                       <option value="{{$r->name}}"
-                        {{in_array($r->name,$user->roles->pluck('name')->toArray())?' selected="selected" ':''}}
+                        {{in_array( $r->name , old('roles', $user->roles->pluck('name')->toArray()) )?' selected="selected" ':''}}
                       >{{$r->name}}</option>
                       @endforeach
                       </select>
+                      @error('roles')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                      @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="permission" class="col-sm-2 col-form-label">Permission</label>
                     <div class="col-sm-10 select2-blue">
-                      <select class="select2 border border-color-primary" name="permissions[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
+                      <select class="select2 form-control @error('permissions') is-invalid @enderror" name="permissions[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
                       @foreach($permission as $p)
                       <option value="{{$p->name}}"
-                        {{in_array($p->name,$user->permissions->pluck('name')->toArray())?' selected="selected" ':''}}
+                        {{in_array( $p->name, old('permissions', $user->permissions->pluck('name')->toArray()) )?' selected="selected" ':''}}
                       >{{$p->name}}</option>
                       @endforeach
                       </select>
