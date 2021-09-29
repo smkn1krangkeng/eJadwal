@@ -75,6 +75,13 @@
     });
 </script>
 <script>
+  $(document).ready(function() {
+      $("#file-upload").change(function(){
+        $("#file-name").text(this.files[0].name);
+      });
+  });
+</script>
+<script>
     $(document).ready(function() {
         $("#delselbtn").click(function(){
             var ids = [];
@@ -129,14 +136,28 @@
                     @csrf
                     @method('DELETE')
                     <input type="hidden" id="checkids" name="userids">
-                    <x-modal name="delsel" target="modal-delsel" title="Confirmation" message="Apakah anda yakin ingin menghapus data berikut ini ?" divid="namesid" tombol="Delete" jenis="danger" />
+                    <x-modal name="delsel" target="modal-delsel" title="Confirmation" message="Apakah anda yakin ingin menghapus data berikut ini ? <div id='namesid'></div>" tombol="Delete" jenis="danger" />
+              </form>
+              <form action="{{ route('pengguna.import') }}" method="post" enctype="multipart/form-data" class="d-inline mx-1">
+                    @csrf
+                    <x-modal name="user_import" target="modal-userimport" title="User Import" 
+                    message="
+                    <div class='custom-file'>
+                      <input id='file-upload' type='file' name='user_file' class='custom-file-input' id='user_import'>
+                      <label id='file-name' class='custom-file-label' for='user_import'>Choose file</label>
+                    </div>
+                    " 
+                    tombol="Upload" jenis="primary" />
               </form>
               <div class="card-body">
                 <div class="divider bg-dark rounded mb-4">
-                  <a class="btn btn-success m-2" href="/pengguna/export" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
-                  <i class="fas fa-file-excel"></i>
+                  <a class="btn btn-success my-2 ml-2" href="/pengguna/export" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
+                  Export
                   </a>
-                  <button type="button" id="delselbtn" class="btn btn-danger" data-toggle="modal" data-target="#modal-delsel">
+                  <button type="button" id="user_import" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#modal-userimport" data-toggle="tooltip" data-placement="top" title="Import from Excel">
+                    Import
+                  </button>
+                  <button type="button" id="delselbtn" class="btn btn-danger my-2 ml-2" data-toggle="modal" data-target="#modal-delsel" data-toggle="tooltip" data-placement="top" title="Delete User Selection">
                     Delete Selection
                   </button>
                 </div>

@@ -27,9 +27,24 @@ class PenggunaController extends Controller
         $data['users'] = User::with('roles')->with('permissions')->get();
         return view('pages.pengguna.index',$data);
     }
-    public function excel_export() 
+
+    public function user_export() 
     {
         return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    public function user_import(Request $request) 
+    {
+        $validator = Validator::make($request->all(), [
+            'user_file' => 'required|mimes:xlsx',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->with('error','Import Failed');
+        }
+        $file = $request->file('user_file');
+        $nama_file = 'users.'.$file->getClientOriginalExtension();
+        dd($nama_file);
     }
     
     public function destroy($id)

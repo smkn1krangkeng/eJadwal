@@ -20,16 +20,8 @@
         <th>{{ $no++ }}</th>
         <td>{{$r->name}}</td>
         <td>{{$r->email}}</td>
-        <td>
-            @foreach(($r->roles) as $roles) 
-            {{$roles->name}} 
-            @endforeach
-        </td>
-        <td>
-            @foreach(($r->permissions) as $permis) 
-            {{$permis->name}} 
-            @endforeach
-        </td>
+        <td>{{$r->roles->pluck('name')->implode(',')}} </td>
+        <td>{{$r->permissions->pluck('name')->implode(',')}} </td>
     </tr>
 @endforeach
 </tbody>

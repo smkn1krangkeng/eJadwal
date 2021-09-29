@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class Modal extends Component
 {
-    public $name,$target,$title,$message,$tombol,$jenis,$divid;
+    public $name,$target,$title,$message,$tombol,$jenis;
 
     
     /**
@@ -14,7 +14,7 @@ class Modal extends Component
      *
      * @return void
      */
-    public function __construct($name,$target,$title,$message,$tombol,$jenis,$divid)
+    public function __construct($name,$target,$title,$message,$tombol,$jenis)
     {
         //
         $this->name=$name;
@@ -22,7 +22,6 @@ class Modal extends Component
         $this->title=$title;
         $this->message=$message;
         $this->tombol=$tombol;
-        $this->divid=$divid;
         if($jenis=='danger'){
             $this->jenis='btn btn-danger';
         }elseif($jenis=='success'){

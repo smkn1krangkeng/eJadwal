@@ -8,8 +8,7 @@
           </button>
         </div>
         <div class='modal-body'>
-          {{$message}}
-          <div id='{{$divid}}'></div>
+          {!! $message !!}
         </div>
         <div class='modal-footer justify-content-between'>
           <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
