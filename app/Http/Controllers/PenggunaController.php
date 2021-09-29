@@ -11,6 +11,7 @@ use App\Exports\UsersExport;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class PenggunaController extends Controller
 {
@@ -43,8 +44,12 @@ class PenggunaController extends Controller
             return back()->withErrors($validator)->with('error','Import Failed');
         }
         $file = $request->file('user_file');
-        $nama_file = 'users.'.$file->getClientOriginalExtension();
-        dd($nama_file);
+        //storage\app\uploads
+        $path = $file->storeAs(
+            'uploads', 'users.xlsx'
+        );
+        //dd($path);
+        return redirect()->route('pengguna.index')->with('success','Import Success');
     }
     
     public function destroy($id)
