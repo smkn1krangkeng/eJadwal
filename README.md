@@ -36,4 +36,4 @@ untuk reset database gunakan perintah: php artisan migrate:fresh --seed
 //akses aplikasi via http://localhost:8000
 
 //untuk update aplikasi gunakan perintah
-git pull origin master
+-> git pull origin master
