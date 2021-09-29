@@ -37,3 +37,6 @@ untuk reset database gunakan perintah: php artisan migrate:fresh --seed
 
 //untuk update aplikasi gunakan perintah
 -> git pull origin master
+
+Login default:
+admin@test.id / 12345678
