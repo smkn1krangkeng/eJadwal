@@ -142,6 +142,7 @@
                     @csrf
                     <x-modal name="user_import" target="modal-userimport" title="User Import" 
                     message="
+                    <a href='{{url('/storage/uploads/upload_users.xlsx')}}' >Download Contoh File User Import</a>
                     <div class='custom-file'>
                       <input id='file-upload' type='file' name='user_file' class='custom-file-input' id='user_import'>
                       <label id='file-name' class='custom-file-label' for='user_import'>Choose file</label>
@@ -153,9 +154,6 @@
                 <div class="divider bg-dark rounded mb-4">
                   <a class="btn btn-success my-2 ml-2" href="/pengguna/export" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
                   Export
-                  </a>
-                  <a class="btn btn-success my-2 ml-2" href="{{asset('storage/uploads/users.xlsx');}}" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
-                  Download User.xlsx
                   </a>
                   <button type="button" id="user_import" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#modal-userimport" data-toggle="tooltip" data-placement="top" title="Import from Excel">
                     Import
