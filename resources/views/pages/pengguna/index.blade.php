@@ -154,6 +154,9 @@
                   <a class="btn btn-success my-2 ml-2" href="/pengguna/export" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
                   Export
                   </a>
+                  <a class="btn btn-success my-2 ml-2" href="{{asset('storage/uploads/users.xlsx');}}" role="button" data-toggle="tooltip" data-placement="top" title="Export to Excel">
+                  Download User.xlsx
+                  </a>
                   <button type="button" id="user_import" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#modal-userimport" data-toggle="tooltip" data-placement="top" title="Import from Excel">
                     Import
                   </button>

@@ -46,10 +46,10 @@ class PenggunaController extends Controller
         $file = $request->file('user_file');
         //storage\app\uploads
         $path = $file->storeAs(
-            'uploads', 'users.xlsx'
+            'uploads', 'users.xlsx' , 'public'
         );
-        //dd($path);
-        return redirect()->route('pengguna.index')->with('success','Import Success');
+        dd($path);
+        //return redirect()->route('pengguna.index')->with('success','Import Success');
     }
     
     public function destroy($id)
