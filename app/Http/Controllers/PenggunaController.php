@@ -12,6 +12,8 @@ use App\Imports\UsersImport;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,14 +22,6 @@ class PenggunaController extends Controller
 {
     public function index()
     {
-        // parsing data ke view
-        // $users = User::all();
-        // $title = 'Ini Judul';
-        // return view('pages.pengguna',['users' => $users,'title'=>$title]);
-        // atau
-        // $data['users'] = User::select('name','email')->get();
-        // $data['title'] = 'Ini Judul';
-        // return view('pages.pengguna',$data);
         $data['users'] = User::with('roles')->with('permissions')->get();
         return view('pages.pengguna.index',$data);
     }
@@ -53,27 +47,17 @@ class PenggunaController extends Controller
             return back()->withErrors($validator)->with('error','Update Failed')->withInput();
         }
         //filter password yg kosong
-        $array = collect([
+        $nilai = collect([
             'name'=>$request->input('name'),
             'email'=>$request->input('email'),
             'password'=>Hash::make($request->input('password')),
-            'roles'=>$request->input('roles'),
-            'permissions'=>$request->input('permissions'),
         ])->filter()->all();
         
-        //ambil array name, email, dan password
-        $slice1 = Arr::only($array, ['name', 'email','password']);
-        //dd($slice1);
-        //ambil data role dan permission
-        $slice2 = Arr::only($array, ['roles', 'permissions']);
-        //ambil data role user
-        $user_roles = Arr::get($slice2, 'roles');
-        //ambil data permission user
-        //dd($user_roles);
-        $user_permissions = Arr::get($slice2, 'permissions');
+        $user_roles = $request->input('roles');
+        $user_permissions = $request->input('permissions'); 
         
         //insert data
-        $user = User::create($slice1);
+        $user = User::create($nilai);
         $user->syncRoles($user_roles);
         $user->syncPermissions($user_permissions);
         return redirect()->route('pengguna.index')->with('success','Add User Success');
@@ -150,27 +134,17 @@ class PenggunaController extends Controller
         }
 
         //filter password yg kosong
-        $array = collect([
+        $nilai = collect([
             'name'=>$request->input('name'),
             'email'=>$request->input('email'),
             'password'=>$password,
-            'roles'=>$request->input('roles'),
-            'permissions'=>$request->input('permissions'),
         ])->filter()->all();
-        //ambil array name, email, dan password
-        $slice1 = Arr::only($array, ['name', 'email','password']);
-        //dd($slice1);
-        //ambil data role dan permission
-        $slice2 = Arr::only($array, ['roles', 'permissions']);
-        //ambil data role user
-        $user_roles = Arr::get($slice2, 'roles');
-        //ambil data permission user
-        //dd($user_roles);
-        $user_permissions = Arr::get($slice2, 'permissions');
+        $user_roles = $request->input('roles');
+        $user_permissions = $request->input('permissions'); 
 
         //update data
         $user = User::find($id);
-        $user->update($slice1);
+        $user->update($nilai);
         $user->syncRoles($user_roles);
         $user->syncPermissions($user_permissions);
         
@@ -179,47 +153,42 @@ class PenggunaController extends Controller
 
     public function deleteSel(Request $request)
     {
-        $ids = explode(",",$request->userids); //membuat array
-        $nids = collect($ids); //membuat collection array
-        $rids = collect($ids)->filter()->all(); //memfilter array
-        $count= $nids->filter()->count(); //menghitung panjang array
+        $validator = Validator::make($request->all(), [
+            'userids' => 'required',
+        ]);
 
-        //fungsi untuk foreach
-        function eksekusi($id){
-            User::where('id',$id)->delete();
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->with('error','Delete Failed');
         }
-        if ($count>0){
-            foreach($rids as $rid){
-                $id=Crypt::decryptString($rid);
-                eksekusi($id);
-            }
-            return redirect()->route('pengguna.index')->with('success','Delete Success');
-        }else{
-            return back()->with('error','Tidak ada data yang dipilih');
+        $userids = Str::of($request->input('userids'))->explode(',')->filter();
+        $ids = $userids->all();
+        foreach($ids as $id){
+            User::where('id',Crypt::decryptString($id))->delete();
         }
+        return redirect()->route('pengguna.index')->with('success','Delete Success');
     }
 
     public function roleSel(Request $request)
     {
-        $ids = explode(",",$request->userids); //membuat array
-        $nids = collect($ids); //membuat collection array
-        $rids = collect($ids)->filter()->all(); //memfilter array
-        $count= $nids->filter()->count(); //menghitung panjang array
-        $count= $nids->filter()->count(); //menghitung panjang array
+        $validator = Validator::make($request->all(), [
+            'userids' => 'required',
+            'roles' => 'required',
+            'permissions' => 'required',
+        ]);
 
-        //fungsi untuk foreach
-        function eksekusi($id){
-           print($id."<br>");     
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->with('error','Roles & Permissions Update Failed');
         }
-        if ($count>0){
-            foreach($rids as $rid){
-                $id=Crypt::decryptString($rid);
-                eksekusi($id);
-            }
-            //return redirect()->route('pengguna.index')->with('success','Delete Success');
-        }else{
-            //return back()->with('error','Tidak ada data yang dipilih');
+        $userids = Str::of($request->input('userids'))->explode(',')->filter();
+        $ids = $userids->all();
+        $user_roles = $request->input('roles');
+        $user_permissions = $request->input('permissions'); 
+        foreach($ids as $id){
+            $user = User::find(Crypt::decryptString($id));
+            $user->syncRoles($user_roles);
+            $user->syncPermissions($user_permissions);
         }
+        return redirect()->route('pengguna.index')->with('success','Roles & Permissions Update Success');
     }
 
 
