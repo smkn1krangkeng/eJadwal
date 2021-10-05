@@ -32,11 +32,11 @@
   @endif
 </script>
 @endpush
-@section('judul_hal','Edit Pengguna')
+@section('judul_hal','Tambah Pengguna')
 @section('header_hal')
 <li class="breadcrumb-item"><a href="#">Konfigurasi</a></li>
 <li class="breadcrumb-item"><a href="/pengguna">Pengguna</a></li>
-<li class="breadcrumb-item active">Edit</li>
+<li class="breadcrumb-item active">Add</li>
 @endsection
 <!-- main menu sidebar -->
 @section('menu_konfig') 
@@ -56,7 +56,7 @@
             <div class="card card-outline card-dark">
               <div class="card-header">
                 <h3 class="card-title">
-                  Edit Pengguna
+                  Tambah Pengguna
                 </h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-sm" data-card-widget="collapse">
@@ -68,13 +68,12 @@
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
-              <form method="POST" action="{{ route('pengguna.update', Crypt::encryptString($user->id)) }}">
+              <form method="POST" action="{{route('pengguna.store')}}">
                 @csrf
-                @method('PUT')
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                      <input type="text" name="name" autofocus required value="{{ old('name',$user->name) }}"class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name ...">
+                      <input type="text" name="name" autofocus required value="{{ old('name') }}"class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name ...">
                       @error('name')
                         <span class="invalid-feedback">{{ $message }}</span>
                       @enderror
@@ -83,7 +82,7 @@
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                      <input type="email" name="email" required value="{{ old('email',$user->email) }}"class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email ...">
+                      <input type="email" name="email" required value="{{ old('email') }}"class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email ...">
                       @error('email')
                         <span class="invalid-feedback">{{ $message }}</span>
                       @enderror
@@ -92,7 +91,7 @@
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                      <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password ...">
+                      <input type="password" name="password" required class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password ...">
                       @error('password')
                         <span class="invalid-feedback">{{ $message }}</span>
                       @enderror
@@ -101,13 +100,10 @@
                 <div class="form-group row">
                     <label for="roles" class="col-sm-2 col-form-label">Roles</label>
                     <div class="col-sm-10 select2-blue">
-                      @php
-                          $old_roles = (old('_token') !== null) ? collect(old('roles')) : $user->roles->pluck('name');
-                      @endphp
                       <select class="select2 form-control @error('roles') is-invalid @enderror" name="roles[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
                       @foreach($roles as $r)
                         <option value="{{$r->name}}"
-                        {{in_array( $r->name, $old_roles->toArray() ) ? ' selected="selected" ':''}}
+                        {{in_array( $r->name, collect(old('roles'))->toArray() ) ? ' selected="selected" ':''}}
                         >{{$r->name}}</option>
                       @endforeach
                       </select>
@@ -119,20 +115,17 @@
                 <div class="form-group row">
                     <label for="permission" class="col-sm-2 col-form-label">Permission</label>
                     <div class="col-sm-10 select2-blue">
-                      @php
-                          $old_permissions = (old('_token') !== null) ? collect(old('permissions')) : $user->permissions->pluck('name');
-                      @endphp
                       <select class="select2 form-control @error('permissions') is-invalid @enderror" name="permissions[]" multiple="multiple" data-placeholder="Select a Role" data-dropdown-css-class="select2-blue" style="width: 100%;">
                       @foreach($permission as $p)
                       <option value="{{$p->name}}"
-                        {{in_array( $p->name, $old_permissions->toArray() )?' selected="selected" ':''}}
+                        {{in_array( $p->name, collect(old('permissions'))->toArray() )?' selected="selected" ':''}}
                       >{{$p->name}}</option>
                       @endforeach
                       </select>
                     </div>
                 </div>
                   <a href="/pengguna" class="btn btn-default gt">Cancel</a>
-                  <button type="submit" class="btn btn-info float-right ">Update</button>
+                  <button type="submit" class="btn btn-info float-right ">Add</button>
               </form>
               </div><!-- /.card-body -->
             </div>

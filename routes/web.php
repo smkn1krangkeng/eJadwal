@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth']], function () {
     // role untuk admin
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/pengguna', [PenggunaController::class, 'index'] )->name('pengguna.index');
+        Route::get('/pengguna/add', [PenggunaController::class, 'create'] )->name('pengguna.create');
+        Route::post('/pengguna/store', [PenggunaController::class, 'store'] )->name('pengguna.store');
         Route::get('/pengguna/export', [PenggunaController::class, 'user_export'] )->name('pengguna.export');
         Route::post('/pengguna/import', [PenggunaController::class, 'user_import'] )->name('pengguna.import');
         Route::get('/pengguna/edit/{id}', [PenggunaController::class, 'edit'])->name('pengguna.edit');

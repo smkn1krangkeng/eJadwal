@@ -152,15 +152,24 @@
               </form>
               <div class="card-body">
                 <div class="divider bg-dark rounded mb-4">
-                  <a class="btn btn-success my-2 ml-2" href="/pengguna/export" role="button" data-toggle="tooltip" data-placement="top" title="Export Users to Excel">
+                  @can('create.pengguna')
+                  <a class="btn btn-success my-2 ml-2" href="{{route('pengguna.create')}}" role="button" data-toggle="tooltip" data-placement="top" title="Export Users to Excel">
+                  Add User
+                  </a> 
+                  @endcan 
+                  <a class="btn btn-success my-2 ml-2" href="{{route('pengguna.export')}}" role="button" data-toggle="tooltip" data-placement="top" title="Export Users to Excel">
                   Export
                   </a>
+                  @can('create.pengguna')
                   <button type="button" id="user_import" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#modal-userimport" data-toggle="tooltip" data-placement="top" title="Import Users from Excel">
                     Import
                   </button>
+                  @endcan
+                  @can('delete.pengguna')
                   <button type="button" id="delselbtn" class="btn btn-danger my-2 ml-2" data-toggle="modal" data-target="#modal-delsel" data-toggle="tooltip" data-placement="top" title="Delete Users Selection">
                     Delete Selection
                   </button>
+                  @endcan
                 </div>
                 @php
                     $no = 1;
@@ -177,6 +186,7 @@
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
+                @can('read.pengguna')
                   <tbody>
                   @foreach($users as $r)
                     <tr> 
@@ -191,23 +201,33 @@
                         {{$r->permissions->pluck('name')->implode(',')}} 
                       </td>
                       <td>
+                        @can('update.pengguna')
                         <form action="{{ route('pengguna.edit', Crypt::encryptString($r->id)) }}" method="post" class="d-inline mx-1">
                           @csrf
                           @method('GET')
                               <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                         </form>
+                        @endcan
                         <form action="{{ route('pengguna.del', Crypt::encryptString($r->id)) }}" method="post" class="d-inline mx-1">
                           @csrf
                           @method('DELETE')                      
                           <x-modal name="deluser" target="modal-del-{{$r->id}}" title="Confirmation" message="Apakah anda yakin ingin menghapus {{$r->name}}" divid="{{$r->name}}" tombol="Delete" jenis="danger" />
                         </form>
+                        
+                        @can('delete.pengguna')
                         <button type="button" id="del-{{$r->id}}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-del-{{$r->id}}">
                           Delete
                         </button>
+                        @endcan
                       </td>
                     </tr>
                   @endforeach
                   </tbody>
+                @else
+                <tr>
+                  <td colspan="7" class="text-center text-danger">Tidak Memiliki Akses Read Pengguna </td>
+                </tr>
+                @endcan
                 </table>
               </div><!-- /.card-body -->
             </div>

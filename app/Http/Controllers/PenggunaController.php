@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 
 class PenggunaController extends Controller
@@ -29,6 +30,53 @@ class PenggunaController extends Controller
         // return view('pages.pengguna',$data);
         $data['users'] = User::with('roles')->with('permissions')->get();
         return view('pages.pengguna.index',$data);
+    }
+
+    public function create()
+    {
+        $data['roles']= Role::all();
+        $data['permission']= Permission::all();
+        return view('pages.pengguna.create',$data);
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'roles' => 'nullable',
+            'permissions' => 'nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->with('error','Update Failed')->withInput();
+        }
+        //filter password yg kosong
+        $array = collect([
+            'name'=>$request->input('name'),
+            'email'=>$request->input('email'),
+            'password'=>Hash::make($request->input('password')),
+            'roles'=>$request->input('roles'),
+            'permissions'=>$request->input('permissions'),
+        ])->filter()->all();
+        
+        //ambil array name, email, dan password
+        $slice1 = Arr::only($array, ['name', 'email','password']);
+        //dd($slice1);
+        //ambil data role dan permission
+        $slice2 = Arr::only($array, ['roles', 'permissions']);
+        //ambil data role user
+        $user_roles = Arr::get($slice2, 'roles');
+        //ambil data permission user
+        //dd($user_roles);
+        $user_permissions = Arr::get($slice2, 'permissions');
+        
+        //insert data
+        $user = User::create($slice1);
+        $user->syncRoles($user_roles);
+        $user->syncPermissions($user_permissions);
+        return redirect()->route('pengguna.index')->with('success','Add User Success');
     }
 
     public function user_export() 
@@ -87,17 +135,31 @@ class PenggunaController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'nullable|min:6',
-            'roles' => 'required',
+            'roles' => 'nullable',
             'permissions' => 'nullable',
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->with('error','Update Failed')->withInput();
         }
+
+        if(!empty($request->input('password'))) {
+            $password=Hash::make($request->input('password'));
+        } else {
+            $password=null;
+        }
+
         //filter password yg kosong
-        $array = collect( $request->all() )->filter()->all();
+        $array = collect([
+            'name'=>$request->input('name'),
+            'email'=>$request->input('email'),
+            'password'=>$password,
+            'roles'=>$request->input('roles'),
+            'permissions'=>$request->input('permissions'),
+        ])->filter()->all();
         //ambil array name, email, dan password
         $slice1 = Arr::only($array, ['name', 'email','password']);
+        //dd($slice1);
         //ambil data role dan permission
         $slice2 = Arr::only($array, ['roles', 'permissions']);
         //ambil data role user
