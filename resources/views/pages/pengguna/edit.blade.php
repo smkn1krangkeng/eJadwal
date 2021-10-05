@@ -129,6 +129,9 @@
                       >{{$p->name}}</option>
                       @endforeach
                       </select>
+                      @error('permissions')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                      @enderror
                     </div>
                 </div>
                   <a href="/pengguna" class="btn btn-default gt">Cancel</a>

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Pengguna;
 
 use Illuminate\View\Component;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
-class Modal extends Component
+class Rolesmodal extends Component
 {
-    public $name,$target,$title,$message,$tombol,$jenis;
-
-    
+    public $name,$target,$title,$message,$tombol,$jenis,$roles,$permissions;
     /**
      * Create a new component instance.
      *
@@ -22,6 +22,8 @@ class Modal extends Component
         $this->title=$title;
         $this->message=$message;
         $this->tombol=$tombol;
+        $this->roles=Role::all();
+        $this->permissions=Permission::all();
         if($jenis=='danger'){
             $this->jenis='btn btn-danger';
         }elseif($jenis=='success'){
@@ -31,7 +33,6 @@ class Modal extends Component
         }elseif($jenis=='primary'){
             $this->jenis='btn btn-primary';
         }
-
     }
 
     /**
@@ -41,6 +42,6 @@ class Modal extends Component
      */
     public function render()
     {
-        return view('components.modal');
+        return view('components.pengguna.rolesmodal');
     }
 }

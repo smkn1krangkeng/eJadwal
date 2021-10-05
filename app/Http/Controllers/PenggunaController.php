@@ -29,8 +29,6 @@ class PenggunaController extends Controller
         // $data['title'] = 'Ini Judul';
         // return view('pages.pengguna',$data);
         $data['users'] = User::with('roles')->with('permissions')->get();
-        $data['roles']= Role::all();
-        $data['permission']= Permission::all();
         return view('pages.pengguna.index',$data);
     }
 
@@ -198,6 +196,29 @@ class PenggunaController extends Controller
             return redirect()->route('pengguna.index')->with('success','Delete Success');
         }else{
             return back()->with('error','Tidak ada data yang dipilih');
+        }
+    }
+
+    public function roleSel(Request $request)
+    {
+        $ids = explode(",",$request->userids); //membuat array
+        $nids = collect($ids); //membuat collection array
+        $rids = collect($ids)->filter()->all(); //memfilter array
+        $count= $nids->filter()->count(); //menghitung panjang array
+        $count= $nids->filter()->count(); //menghitung panjang array
+
+        //fungsi untuk foreach
+        function eksekusi($id){
+           print($id."<br>");     
+        }
+        if ($count>0){
+            foreach($rids as $rid){
+                $id=Crypt::decryptString($rid);
+                eksekusi($id);
+            }
+            //return redirect()->route('pengguna.index')->with('success','Delete Success');
+        }else{
+            //return back()->with('error','Tidak ada data yang dipilih');
         }
     }
 

@@ -173,23 +173,12 @@
                     <div id='namesid'class='font-weight-bold'></div>
                     " tombol="Delete" jenis="danger" />
               </form>
-              <form action="" method="post" class="d-inline mx-1">
+              <form action="{{route('pengguna.roleSel')}}" method="post" class="d-inline mx-1">
                     @csrf
-                    <x-modal name="userroles" target="modal-userroles" title="Add/Edit User Roles & Permissions" 
-                    message="
-                    Roles & Permissions untuk 
-                    <div id='namesidrole' class='font-weight-bold'></div> 
-                    adalah :
-                    <div class='form-group row'>
-                      <label for='roles' class='col-sm-2 col-form-label'>Roles</label>
-                      <div class='col-sm-10 select2-blue'>
-                      <input type='hidden' id='checkidsrole' name='useridsrole'>
-                      <select class='select2 form-control' name='permissions[]' multiple='multiple' data-placeholder='Select a Role' data-dropdown-css-class='select2-blue' style='width: 100%'>
-                      <option value='1'>satu</option>
-                      <option value='2'>dua</option>
-                      </select>
-                      </div>
-                    </div>
+                    <input type="hidden" id="checkidsrole" name="userids">
+                    <x-pengguna.rolesmodal name="userroles" target="modal-userroles" title="Add/Edit User Roles & Permissions" 
+                    message="Berikan Role & Permission untuk :
+                    <div id='namesidrole'class='font-weight-bold'></div>
                     " tombol="Save" jenis="primary" />
               </form>
               <form action="{{ route('pengguna.import') }}" method="post" enctype="multipart/form-data" class="d-inline mx-1">
