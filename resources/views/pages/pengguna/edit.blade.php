@@ -135,7 +135,7 @@
                     </div>
                 </div>
                   <a href="/pengguna" class="btn btn-default gt">Cancel</a>
-                  <button type="submit" class="btn btn-info float-right ">Update</button>
+                  <button type="submit" class="btn btn-primary float-right ">Update</button>
               </form>
               </div><!-- /.card-body -->
             </div>
