@@ -29,6 +29,8 @@ class PenggunaController extends Controller
         // $data['title'] = 'Ini Judul';
         // return view('pages.pengguna',$data);
         $data['users'] = User::with('roles')->with('permissions')->get();
+        $data['roles']= Role::all();
+        $data['permission']= Permission::all();
         return view('pages.pengguna.index',$data);
     }
 

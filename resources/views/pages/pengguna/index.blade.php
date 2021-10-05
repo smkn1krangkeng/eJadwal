@@ -5,9 +5,25 @@
 <link rel="stylesheet" href="{{url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{url('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{url('plugins/toastr/toastr.css')}}">
+<!-- Select2 -->
+<link rel="stylesheet" href="{{url('plugins/select2/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{url('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
 @push('scripts')
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<script>
+  $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+      $('.select2-selection').css('border-color','#DEE2E6');
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+      theme: 'bootstrap4'
+      })
+  })
+</script>
 <!-- DataTables  & Plugins -->
 <script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -97,6 +113,22 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $("#rolebtn").click(function(){
+            var ids = [];
+            var names = [];
+            $.each($("input[name='userids']:checked"), function(){
+                ids.push($(this).val());
+                names.push($(this).data('name'));
+            });
+            var x = ids.join(",");
+            var y = names.join(", ");
+            document.getElementById("checkidsrole").value = x;
+            document.getElementById("namesidrole").innerHTML = y;
+        });
+    });
+</script>
 @endpush
 @section('judul_hal','Pengguna')
 @section('header_hal')
@@ -136,7 +168,29 @@
                     @csrf
                     @method('DELETE')
                     <input type="hidden" id="checkids" name="userids">
-                    <x-modal name="delsel" target="modal-delsel" title="Confirmation" message="Apakah anda yakin ingin menghapus data berikut ini ? <div id='namesid'></div>" tombol="Delete" jenis="danger" />
+                    <x-modal name="delsel" target="modal-delsel" title="Confirmation" 
+                    message="Apakah anda yakin ingin menghapus data berikut ini ? 
+                    <div id='namesid'class='font-weight-bold'></div>
+                    " tombol="Delete" jenis="danger" />
+              </form>
+              <form action="" method="post" class="d-inline mx-1">
+                    @csrf
+                    <x-modal name="userroles" target="modal-userroles" title="Add/Edit User Roles & Permissions" 
+                    message="
+                    Roles & Permissions untuk 
+                    <div id='namesidrole' class='font-weight-bold'></div> 
+                    adalah :
+                    <div class='form-group row'>
+                      <label for='roles' class='col-sm-2 col-form-label'>Roles</label>
+                      <div class='col-sm-10 select2-blue'>
+                      <input type='hidden' id='checkidsrole' name='useridsrole'>
+                      <select class='select2 form-control' name='permissions[]' multiple='multiple' data-placeholder='Select a Role' data-dropdown-css-class='select2-blue' style='width: 100%'>
+                      <option value='1'>satu</option>
+                      <option value='2'>dua</option>
+                      </select>
+                      </div>
+                    </div>
+                    " tombol="Save" jenis="primary" />
               </form>
               <form action="{{ route('pengguna.import') }}" method="post" enctype="multipart/form-data" class="d-inline mx-1">
                     @csrf
@@ -161,8 +215,13 @@
                   Export
                   </a>
                   @can('create.pengguna')
-                  <button type="button" id="user_import" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#modal-userimport" data-toggle="tooltip" data-placement="top" title="Import Users from Excel">
+                  <button type="button" id="user_import" class="btn btn-warning my-2 ml-2" data-toggle="modal" data-target="#modal-userimport" data-toggle="tooltip" data-placement="top" title="Import Users from Excel">
                     Import
+                  </button>
+                  @endcan
+                  @can('update.pengguna')
+                  <button type="button" id="rolebtn" class="btn btn-primary my-2 ml-2" data-toggle="modal" data-target="#modal-userroles" data-toggle="tooltip" data-placement="top" title="Add/Edit User Roles & Permissions">
+                    Roles & Permissions
                   </button>
                   @endcan
                   @can('delete.pengguna')
