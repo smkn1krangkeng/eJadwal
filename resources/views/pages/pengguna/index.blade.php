@@ -91,7 +91,7 @@
                 names.push($(this).data('name'));
             });
             var x = ids.join(",");
-            var y = names.join(",");
+            var y = names.join(", ");
             document.getElementById("checkids").value = x;
             document.getElementById("namesid").innerHTML = y;
         });
