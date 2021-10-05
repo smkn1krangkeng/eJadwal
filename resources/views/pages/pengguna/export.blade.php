@@ -20,8 +20,8 @@
         <th>{{ $no++ }}</th>
         <td>{{$r->name}}</td>
         <td>{{$r->email}}</td>
-        <td>{{$r->roles->pluck('name')->implode(',')}} </td>
-        <td>{{$r->permissions->pluck('name')->implode(',')}} </td>
+        <td>{{$r->roles->pluck('name')->implode(', ')}} </td>
+        <td>{{$r->permissions->pluck('name')->implode(', ')}} </td>
     </tr>
 @endforeach
 </tbody>
