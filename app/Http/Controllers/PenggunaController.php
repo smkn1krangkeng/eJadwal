@@ -8,10 +8,12 @@ use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use Excel;
 use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+
 
 class PenggunaController extends Controller
 {
@@ -43,13 +45,21 @@ class PenggunaController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->with('error','Import Failed');
         }
+
         $file = $request->file('user_file');
+
         //storage\app\uploads
+        // $path = $file->storeAs(
+        //     'uploads', 'users.xlsx' , 'public'
+        // );
+
         $path = $file->storeAs(
-            'uploads', 'users.xlsx' , 'public'
+            'uploads', 'users.xlsx'
         );
-        dd($path);
-        //return redirect()->route('pengguna.index')->with('success','Import Success');
+        
+        Excel::import(new UsersImport, storage_path('app/uploads/users.xlsx'));
+        //dd($path);
+        return redirect()->route('pengguna.index')->with('success','Import Success');
     }
     
     public function destroy($id)
