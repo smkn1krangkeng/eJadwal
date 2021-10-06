@@ -172,8 +172,8 @@ class PenggunaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'userids' => 'required',
-            'roles' => 'required',
-            'permissions' => 'required',
+            'roles' => 'nullable',
+            'permissions' => 'nullable',
         ]);
 
         if ($validator->fails()) {
