@@ -18,13 +18,7 @@
         <div class="info">
           <div class="d-block text-light">
             <span class="badge badge-info">  
-              Login As 
-              @hasanyrole('admin')
-              Admin
-              @endhasanyrole
-              @hasanyrole('gurumapel')
-              Guru Mapel
-              @endhasanyrole
+              Login As {{ Auth::user()->roles()->pluck('name')->implode(',') }}
             </span>
           </div>
         </div>
@@ -57,6 +51,12 @@
               @sectionMissing('menu_pengguna') <a href="/pengguna" class="nav-link"> @else @yield('menu_pengguna') @endif
                   <i class="far fa-circle nav-icon text-danger"></i>
                   <p>Pengguna</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              @sectionMissing('menu_user') <a href="/user" class="nav-link"> @else @yield('menu_user') @endif
+                  <i class="far fa-circle nav-icon text-danger"></i>
+                  <p>User</p>
                 </a>
               </li>
             </ul>

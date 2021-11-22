@@ -12,3 +12,5 @@
 <script src="{{url('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{url('dist/js/adminlte.js')}}"></script>
+<!-- livewire scripts-->
+@livewireScripts
