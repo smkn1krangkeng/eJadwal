@@ -13,6 +13,6 @@ class Users extends Component
     public function render()
     {
         $this->users = User::with('roles')->with('permissions')->get();
-        return view('livewire.users')->extends('pages.users.index');
+        return view('livewire.users')->extends('layout.backend.main')->section('konten');
     }
 }
