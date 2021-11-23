@@ -17,14 +17,14 @@ class RoleSeeder extends Seeder
     public function run()
     {
         //create roles
-        $admin=Role::create(['name' => 'admin']);
-        $gurumapel=Role::create(['name' => 'gurumapel']);
-        $kaprog=Role::create(['name' => 'kaprog']);
-        $walikelas=Role::create(['name' => 'walikelas']);
-        $wakakur=Role::create(['name' => 'wakakur']);
-        $kepalasekolah=Role::create(['name' => 'kepalasekolah']);
-        $ketuakelas=Role::create(['name' => 'ketuakelas']);
-        $user=Role::create(['name' => 'user']);
+        $admin=Role::create(['name' => 'Admin']);
+        $gurumapel=Role::create(['name' => 'Guru Mapel']);
+        $kaprog=Role::create(['name' => 'Kaprog']);
+        $walikelas=Role::create(['name' => 'Wali Kelas']);
+        $wakakur=Role::create(['name' => 'Waka Kur']);
+        $kepalasekolah=Role::create(['name' => 'Kepala Sekolah']);
+        $ketuakelas=Role::create(['name' => 'Ketua Kelas']);
+        $user=Role::create(['name' => 'User']);
 
     }
 }

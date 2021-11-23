@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\Users;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'] )->name('dashboard');
     
     // role untuk admin
-    Route::group(['middleware' => ['role:admin']], function () {
+    Route::group(['middleware' => ['role:Admin']], function () {
         Route::get('/pengguna', [PenggunaController::class, 'index'] )->name('pengguna.index');
         Route::get('/pengguna/add', [PenggunaController::class, 'create'] )->name('pengguna.create');
         Route::post('/pengguna/store', [PenggunaController::class, 'store'] )->name('pengguna.store');
@@ -40,7 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/penggunas/delSel', [PenggunaController::class, 'deleteSel'])->name('pengguna.delsel');
         Route::post('/pengguna/roleSel', [PenggunaController::class, 'roleSel'] )->name('pengguna.roleSel');
         //user
-        Route::get('/user', [UserController::class, 'index'] )->name('user.index');
+        //Route::get('/user', [UserController::class, 'index'] )->name('user.index');
+        Route::get('/user', Users::class);
     });
     
 

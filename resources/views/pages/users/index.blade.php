@@ -101,7 +101,7 @@
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
-                @livewire('user.index')
+                @livewire('users')
               </div><!-- /.card-body -->
             </div><!-- /.card -->
           </section><!-- /.Left col -->

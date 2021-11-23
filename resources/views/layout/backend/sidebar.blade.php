@@ -37,7 +37,7 @@
             </a>
           </li>
           <!-- menu admin -->
-          @hasanyrole('admin')
+          @hasanyrole('Admin')
           @sectionMissing('menu_konfig') <li class="nav-item"> @else @yield('menu_konfig') @endif
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cogs text-danger"></i>

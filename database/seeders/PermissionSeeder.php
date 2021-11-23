@@ -17,10 +17,10 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         // create permissions CRUD
-        Permission::create(['name' => 'create.*']);
-        Permission::create(['name' => 'read.*']);
-        Permission::create(['name' => 'update.*']);
-        Permission::create(['name' => 'delete.*']);
+        Permission::create(['name' => 'Create.*']);
+        Permission::create(['name' => 'Read.*']);
+        Permission::create(['name' => 'Update.*']);
+        Permission::create(['name' => 'Delete.*']);
 
     }
 }
