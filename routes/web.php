@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Livewire\Dashboards;
+use App\Http\Livewire\Logins;
 use App\Http\Livewire\Users;
 
 /*
@@ -19,13 +20,13 @@ use App\Http\Livewire\Users;
 //frontend page
 Route::get('/', function () {return view('pages.home');});
 Route::get('/home', function () {return view('pages.home');})->name('home');
-Route::get('/login', [LoginController::class, 'getLogin'])->middleware('guest')->name('login');
+Route::get('/login', Logins::class)->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'postLogin']);
 Route::post('/logout', [LoginController::class, 'logout']);
 //backend page
 Route::group(['middleware' => ['auth']], function () {
     // role untuk yang auth
-    Route::get('/dashboard', [DashboardController::class, 'index'] )->name('dashboard');
+    Route::get('/dashboard',Dashboards::class)->name('dashboard');
     
     // role untuk admin
     Route::group(['middleware' => ['role:Admin']], function () {
