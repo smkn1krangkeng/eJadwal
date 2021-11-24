@@ -11,7 +11,7 @@ body {
 @push('scripts')
 <script src="{{url('plugins/toastr/toastr.min.js')}}"></script>
 <script>
-  @if(Session::has('loginError'))
+  @if(session()->has('loginError'))
     toastr.options =
     {
       "closeButton" : true,
@@ -26,11 +26,11 @@ body {
     <img src="{{url('img/logo2.png')}}" alt="eJadwal" class="" style="width:70px; height:70px">
     </div>
     <div class="card-body">
-        <form action="/login" method="post">
-        @csrf
+        <form wire:submit.prevent="login">
+          @csrf
         <div class="input-group mb-3">
-            <input type="email" name="email" id="email" class="form-control" placeholder="Email" 
-            autofocus required value="{{ old('email') }}">
+            <input type="email" wire:model="email" name="email" id="email" class="form-control" placeholder="Email" 
+            autofocus value="{{ old('email') }}">
             <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -38,7 +38,7 @@ body {
             </div>
         </div>
         <div class="input-group mb-3">
-            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+            <input type="password" wire:model="password" name="password" id="password" class="form-control" placeholder="Password">
             <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -51,7 +51,7 @@ body {
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
             </div>
             <div class="col-12 text-center mt-3">
-            <a href="/" class="stretched-link">Back to Home</a>
+            <a href="{{url('/')}}" class="stretched-link">Back to Home</a>
             </div>
             <!-- /.col -->
         </div>

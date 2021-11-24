@@ -12,13 +12,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <form action="/logout" method="post" id="logout">
-        @csrf
-          <button class="btn btn-outline-success my-2 my-sm-0" href="#" type="submit">
-            <i class="fas fa-sign-out-alt"></i>
-            Sign Out
-          </button>
-        </form>
+        @livewire('logouts')
       </li>
     </ul>
   </nav>

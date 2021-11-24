@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Livewire\Dashboards;
+use App\Http\Livewire\Homes;
 use App\Http\Livewire\Logins;
+use App\Http\Livewire\Logouts;
 use App\Http\Livewire\Users;
 
 /*
@@ -18,11 +19,12 @@ use App\Http\Livewire\Users;
 |
 */
 //frontend page
-Route::get('/', function () {return view('pages.home');});
-Route::get('/home', function () {return view('pages.home');})->name('home');
+//Route::get('/', function () {return view('pages.home');});
+Route::get('/', Homes::class);
+Route::get('/home', Homes::class)->name('home');
 Route::get('/login', Logins::class)->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'postLogin']);
-Route::post('/logout', [LoginController::class, 'logout']);
+//Route::post('/login', [LoginController::class, 'postLogin']);
+Route::get('/logout', Logouts::class)->name('logout');
 //backend page
 Route::group(['middleware' => ['auth']], function () {
     // role untuk yang auth

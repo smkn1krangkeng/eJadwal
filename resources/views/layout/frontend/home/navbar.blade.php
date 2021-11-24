@@ -15,7 +15,7 @@
                     </form>
                     </li>
                     @else
-                    <li class="nav-item"><a class="nav-link" href="/login">
+                    <li class="nav-item"><a class="nav-link" href="{{route('login')}}">
                     <i class="fas fa-sign-in-alt"></i>
                     Sign In</a></li>
                     @endauth
