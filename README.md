@@ -13,20 +13,26 @@ Instalasi:
 4. buka git bash
 <pre>
 <code>
+
 -> cd c:/xampp/htdocs/ejadwal
 -> git clone https://github.com/smkn1krangkeng/eJadwal.git
 -> cd ejadwal
 -> composer install
 -> cp .env.example .env
 -> php artisan key:generate
+
 // buka file .env setting database:
 DB_DATABASE=ejadwal
 DB_USERNAME=ejadwal
 DB_PASSWORD=ejadwal
+
 -> php artisan migrate
 -> php artisan db:seed
+
 // optional
-untuk reset database gunakan perintah: php artisan migrate:fresh --seed
+//reset database gunakan perintah
+->php artisan migrate:fresh --seed
+
 -> php artisan route:cache
 -> php artisan config:cache
 -> php artisan view:cache
@@ -37,6 +43,7 @@ untuk reset database gunakan perintah: php artisan migrate:fresh --seed
 
 //untuk update aplikasi gunakan perintah
 -> git pull origin master
+
 </code>
 </pre>
 
