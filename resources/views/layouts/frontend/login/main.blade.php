@@ -8,7 +8,7 @@
     <meta name="author" content="M. Ade Erik, S.Pd.">
     <title>eJadwal | @yield('judul_hal')</title>
     <!-- Bootstrap CSS -->
-    @include('layout.frontend.login.header') 
+    @include('layouts.frontend.login.header') 
     @stack('css')
     
 </head>
@@ -22,7 +22,7 @@
     </div>
     <!-- /.login-box -->
     <!-- Bootstrap Scripts -->
-    @include('layout.frontend.login.footer')   
+    @include('layouts.frontend.login.footer')   
     @stack('scripts')
   </body>
 </html>

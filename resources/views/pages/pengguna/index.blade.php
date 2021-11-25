@@ -1,4 +1,4 @@
-@extends('layout.backend.main')
+@extends('layouts.backend.main')
 @push('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">

@@ -10,9 +10,10 @@ use App\Models\User;
 class Users extends Component
 {
     public $user;
+
     public function render()
     {
         $this->users = User::with('roles')->with('permissions')->get();
-        return view('livewire.users')->extends('layout.backend.main')->section('konten');
+        return view('livewire.users')->layout('layouts.back.app');
     }
 }

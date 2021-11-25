@@ -1,4 +1,4 @@
-@extends('layout.backend.main')
+@extends('layouts.backend.main')
 @push('css')
 <link rel="stylesheet" href="{{url('plugins/toastr/toastr.css')}}">
 <!-- Select2 -->

@@ -66,6 +66,7 @@
 </script>
 @endpush
 @section('judul_hal','User')
+@section('card-title','User')
 @section('header_hal')
 <li class="breadcrumb-item"><a href="#">Konfigurasi</a></li>
 <li class="breadcrumb-item active">User</li>
@@ -78,64 +79,58 @@
 @section('menu_user')
 <a href="/user" class="nav-link active">
 @endsection
-
-<!-- Main row -->
-<div class="row">
-    <!-- Left col -->
-    <section class="col-lg-12 connectedSortable">
-    <!-- Custom tabs (Charts with tabs)-->
-    <div class="card card-outline card-dark">
-        <div class="card-header">
-        <h3 class="card-title">
-            User
-        </h3>
-        <div class="card-tools">
-            <button type="button" class="btn btn-sm" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-sm" data-card-widget="remove">
-            <i class="fas fa-times"></i>
-            </button>
-        </div>
-        </div><!-- /.card-header -->
-        <div class="card-body">
-            @php
-                $no = 1;
-            @endphp
-            <table id="users-table" class="table table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col"><input type="checkbox" id="master"></th>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Roles</th>
-                        <th scope="col">Permissions</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($users as $row)
-                    <tr> 
-                        <td><input type="checkbox" class="sub_chk" name="userids" value="{{$row->id}}" data-name="{{$row->name}}"></td>
-                        <th scope="row">{{ $no++ }}</th>
-                        <td>{{$row->name}}</td>
-                        <td>{{$row->email}}</td>
-                        <td>
-                            {{$row->roles->pluck('name')->implode(', ')}} 
-                        </td>
-                        <td>
-                            {{$row->permissions->pluck('name')->implode(', ')}} 
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div><!-- /.card-body -->
-    </div><!-- /.card -->
-    </section><!-- /.Left col -->
-</div><!-- /.row (main row) -->
+<div>
+  <div class="divider bg-dark rounded mb-4">
+    <button wire:click="tambah" class="btn btn-success my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Export Users to Excel">
+    Add User
+    </button>
+    <button class="btn btn-success my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Export Users to Excel">
+    Export
+    </button>
+    <button class="btn btn-warning my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Import Users from Excel">
+      Import
+    </button>
+    <button class="btn btn-primary my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Add/Edit User Roles & Permissions">
+      Roles & Permissions
+    </button>
+    <button class="btn btn-danger my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Delete Users Selection">
+      Delete Selection
+    </button>
+  </div>
+  @php
+  $no = 1;
+  @endphp
+  <table id="users-table" class="table table-hover">
+      <thead class="thead-dark">
+          <tr>
+              <th scope="col"><input type="checkbox" id="master"></th>
+              <th scope="col">No</th>
+              <th scope="col">Nama</th>
+              <th scope="col">Email</th>
+              <th scope="col">Roles</th>
+              <th scope="col">Permissions</th>
+              <th scope="col">Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          @foreach($users as $row)
+          <tr> 
+              <td><input type="checkbox" class="sub_chk" name="userids" value="{{$row->id}}" data-name="{{$row->name}}"></td>
+              <th scope="row">{{ $no++ }}</th>
+              <td>{{$row->name}}</td>
+              <td>{{$row->email}}</td>
+              <td>
+                  {{$row->roles->pluck('name')->implode(', ')}} 
+              </td>
+              <td>
+                  {{$row->permissions->pluck('name')->implode(', ')}} 
+              </td>
+              <td>
+                  <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+              </td>
+          </tr>
+      @endforeach
+      </tbody>
+  </table>
+</div>

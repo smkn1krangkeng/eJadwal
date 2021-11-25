@@ -11,7 +11,7 @@ class Logins extends Component
 
     public function render()
     {
-        return view('livewire.logins')->extends('layout.frontend.login.main')->section('login_form');
+        return view('livewire.logins')->extends('layouts.frontend.login.main')->section('login_form');
     }
 
     public function login()

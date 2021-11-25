@@ -7,12 +7,12 @@
     <meta name="description" content="eRapor SMKN 1 Krangkeng">
     <meta name="author" content="M. Ade Erik, S.Pd.">
     <title>eJadwal | @yield('judul_hal')</title>
-    @include('layout.frontend.home.styles')
+    @include('layouts.frontend.home.styles')
     @stack('css') 
 </head>
 
 <body>
-    @include('layout.frontend.home.navbar') 
+    @include('layouts.frontend.home.navbar') 
     <main class="page landing-page">
         @yield('home1')
         @yield('home2')
@@ -20,8 +20,8 @@
         @yield('home4')
         @yield('home5')
     </main>
-    @include('layout.frontend.home.footer')    
-    @include('layout.frontend.home.scripts') 
+    @include('layouts.frontend.home.footer')    
+    @include('layouts.frontend.home.scripts') 
     @stack('scripts')   
 </body>
 

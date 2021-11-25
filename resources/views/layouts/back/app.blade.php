@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>eJadwal | @yield('judul_hal')</title>
-  @include('layout.backend.style') 
-  @include('layout.backend.header') 
+  @include('layouts.back.style') 
+  @include('layouts.back.header') 
   @stack('css')
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{url('css/app.css')}}">
@@ -15,7 +15,7 @@
 <div class="wrapper">
 
   <!-- Navbar -->
-  @include('layout.backend.navbar') 
+  @include('layouts.back.navbar') 
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
@@ -27,7 +27,7 @@
     </a>
 
     <!-- Sidebar -->
-    @include('layout.backend.sidebar') 
+    @include('layouts.back.sidebar') 
     <!-- /.sidebar -->
   </aside>
 
@@ -52,18 +52,42 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        @yield('konten')
+      <div class="container-fluid">  
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-12 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card card-outline card-dark">
+                <div class="card-header">
+                <h3 class="card-title">
+                  @yield('card-title')
+                </h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-sm" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                    {{ $slot }}
+                </div><!-- /.card-body -->
+            </div><!-- /.card -->
+            </section><!-- /.Left col -->
+        </div><!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  @include('layout.backend.footer') 
+  @include('layouts.back.footer') 
 </div>
 <!-- ./wrapper -->
 
-@include('layout.backend.scripts')
+@include('layouts.back.scripts')
 @stack('scripts') 
 </body>
 </html>

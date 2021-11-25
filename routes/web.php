@@ -7,6 +7,7 @@ use App\Http\Livewire\Homes;
 use App\Http\Livewire\Logins;
 use App\Http\Livewire\Logouts;
 use App\Http\Livewire\Users;
+use App\Http\Livewire\Counters;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/pengguna/roleSel', [PenggunaController::class, 'roleSel'] )->name('pengguna.roleSel');
         //user livewire
         Route::get('/user', Users::class);
+        Route::get('/counters', Counters::class)->name('counters');
     });
     
 
