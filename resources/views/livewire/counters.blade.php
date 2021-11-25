@@ -2,6 +2,8 @@
 @endpush
 @push('scripts')
 @endpush
+@section('menu_konfig','on')
+@section('sub_menu_counters','on')
 @section('judul_hal','Counters')
 @section('card-title','Counters')
 @section('header_hal')

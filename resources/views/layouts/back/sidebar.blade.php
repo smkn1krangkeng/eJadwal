@@ -38,7 +38,7 @@
           </li>
           <!-- menu admin -->
           @hasanyrole('Admin')
-          <li class="nav-item menu-open"> <!-- class="nav-item menu-open" -->
+            @hasSection('menu_konfig')<li class="nav-item menu-open">@else<li class="nav-item">@endif<!-- class="nav-item menu-open" -->
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cogs text-danger"></i>
               <p>
@@ -48,19 +48,19 @@
             </a>
             <ul class="nav nav-treeview">   
               <li class="nav-item">
-              <a href="/pengguna" class="nav-link"> <!-- class="nav-link active" -->
+              @hasSection('sub_menu_pengguna')<a href="/pengguna" class="nav-link active">@else<a href="/pengguna" class="nav-link">@endif
                   <i class="far fa-circle nav-icon text-danger"></i>
                   <p>Pengguna</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/user" class="nav-link">
+              @hasSection('sub_menu_user')<a href="/user" class="nav-link active">@else<a href="/user" class="nav-link">@endif
                   <i class="far fa-circle nav-icon text-danger"></i>
                   <p>User</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/counters" class="nav-link active">
+                @hasSection('sub_menu_counters')<a href="/counters" class="nav-link active">@else<a href="/counters" class="nav-link">@endif
                   <i class="far fa-circle nav-icon text-danger"></i>
                   <p>Counters</p>
                 </a>
