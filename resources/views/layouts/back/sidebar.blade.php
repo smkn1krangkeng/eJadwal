@@ -54,13 +54,13 @@
                 </a>
               </li>
               <li class="nav-item">
-              @hasSection('sub_menu_user')<a href="/user" class="nav-link active">@else<a href="/user" class="nav-link">@endif
+              @hasSection('sub_menu_user')<a href="{{route('users')}}" class="nav-link active">@else<a href="{{route('users')}}" class="nav-link">@endif
                   <i class="far fa-circle nav-icon text-danger"></i>
-                  <p>User</p>
+                  <p>Users</p>
                 </a>
               </li>
               <li class="nav-item">
-                @hasSection('sub_menu_counters')<a href="/counters" class="nav-link active">@else<a href="/counters" class="nav-link">@endif
+                @hasSection('sub_menu_counters')<a href="{{route('counters')}}" class="nav-link active">@else<a href="{{route('counters')}}" class="nav-link">@endif
                   <i class="far fa-circle nav-icon text-danger"></i>
                   <p>Counters</p>
                 </a>

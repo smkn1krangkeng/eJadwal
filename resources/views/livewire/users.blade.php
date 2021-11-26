@@ -13,6 +13,7 @@
 <script src="{{url('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 <!-- toastr -->
 <script src="{{url('plugins/toastr/toastr.min.js')}}"></script>
+</script>
 <script>
   @if(Session::has('error'))
     toastr.options =
@@ -65,23 +66,17 @@
     });
 </script>
 @endpush
-@section('judul_hal','User')
-@section('card-title','User')
+@section('menu_konfig','on')
+@section('sub_menu_user','on')
+@section('judul_hal','Users')
+@section('card-title','Users')
 @section('header_hal')
 <li class="breadcrumb-item"><a href="#">Konfigurasi</a></li>
-<li class="breadcrumb-item active">User</li>
-@endsection
-<!-- main menu sidebar -->
-@section('menu_konfig') 
-<li class="nav-item menu-open">
-@endsection
-<!-- sub menu sidebar -->
-@section('menu_user')
-<a href="/user" class="nav-link active">
+<li class="breadcrumb-item active">Users</li>
 @endsection
 <div>
   <div class="divider bg-dark rounded mb-4">
-    <button wire:click="tambah" class="btn btn-success my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Export Users to Excel">
+    <button wire:click="create" class="btn btn-success my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Add User">
     Add User
     </button>
     <button class="btn btn-success my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Export Users to Excel">
@@ -97,40 +92,9 @@
       Delete Selection
     </button>
   </div>
-  @php
-  $no = 1;
-  @endphp
-  <table id="users-table" class="table table-hover">
-      <thead class="thead-dark">
-          <tr>
-              <th scope="col"><input type="checkbox" id="master"></th>
-              <th scope="col">No</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Email</th>
-              <th scope="col">Roles</th>
-              <th scope="col">Permissions</th>
-              <th scope="col">Action</th>
-          </tr>
-      </thead>
-      <tbody>
-          @foreach($users as $row)
-          <tr> 
-              <td><input type="checkbox" class="sub_chk" name="userids" value="{{$row->id}}" data-name="{{$row->name}}"></td>
-              <th scope="row">{{ $no++ }}</th>
-              <td>{{$row->name}}</td>
-              <td>{{$row->email}}</td>
-              <td>
-                  {{$row->roles->pluck('name')->implode(', ')}} 
-              </td>
-              <td>
-                  {{$row->permissions->pluck('name')->implode(', ')}} 
-              </td>
-              <td>
-                  <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
-              </td>
-          </tr>
-      @endforeach
-      </tbody>
-  </table>
+  @if($isAction=='read')
+    @include('livewire.users.users-index')
+  @elseif($isAction=='create')
+    @include('livewire.users.users-create')
+  @endif
 </div>

@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/penggunas/delSel', [PenggunaController::class, 'deleteSel'])->name('pengguna.delsel');
         Route::post('/pengguna/roleSel', [PenggunaController::class, 'roleSel'] )->name('pengguna.roleSel');
         //user livewire
-        Route::get('/user', Users::class);
+        Route::get('/users', Users::class)->name('users');
         Route::get('/counters', Counters::class)->name('counters');
     });
     
