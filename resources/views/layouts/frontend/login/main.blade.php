@@ -15,7 +15,7 @@
 
 <body class="hold-transition login-page">
     <div class="login-box">
-    @yield('login_form')
+    {{ $slot }}
       <!-- /.login-logo -->
       
       <!-- /.card -->

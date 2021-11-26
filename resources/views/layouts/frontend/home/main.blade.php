@@ -14,6 +14,7 @@
 <body>
     @include('layouts.frontend.home.navbar') 
     <main class="page landing-page">
+        {{ $slot }}
         @yield('home1')
         @yield('home2')
         @yield('home3')

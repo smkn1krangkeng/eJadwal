@@ -3,6 +3,14 @@
 @endpush
 @push('scripts')
 @endpush
+@section('home1')
+<section class="clean-block clean-hero" style="background-image:url('{{url('img/tech/image4.jpg')}}');color:rgba(9, 162, 255, 0.85);">
+    <div class="text">
+        <h2>Lorem ipsum dolor sit amet.</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p><button class="btn btn-outline-light btn-lg" type="button">Learn More</button>
+    </div>
+</section>
+@endsection
 @section('home2')
 <section class="clean-block clean-info dark">
     <div class="container">
@@ -113,10 +121,15 @@
 </section>
 @endsection
 <div>
-<section class="clean-block clean-hero" style="background-image:url('{{url('img/tech/image4.jpg')}}');color:rgba(9, 162, 255, 0.85);">
-    <div class="text">
-        <h2>Lorem ipsum dolor sit amet.</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p><button class="btn btn-outline-light btn-lg" type="button">Learn More</button>
-    </div>
-</section>
+    <section>
+        <div class="container">
+            <div class="row mt-3 mb-2 text-end">
+                <div class="col">
+                    <div wire:poll.keep-alive>
+                            Tanggal : @php date_default_timezone_set("Asia/Jakarta"); @endphp {{ date("d/m/Y") }} Waktu: {{ date("H:i") }} WIB
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

@@ -8,20 +8,20 @@ body {
 </style>
 <link rel="stylesheet" href="{{url('plugins/toastr/toastr.css')}}">
 @endpush
-@push('scripts')
-<script src="{{url('plugins/toastr/toastr.min.js')}}"></script>
-<script>
-  @if(session()->has('loginError'))
-    toastr.options =
-    {
-      "closeButton" : true,
-      "progressBar" : true
-    }
-  	toastr.error("{{ session('loginError') }}");
-  @endif
-</script>
-@endpush
 <div class="card card-outline card-primary">
+  @push('scripts')
+  <script src="{{url('plugins/toastr/toastr.min.js')}}"></script>
+  <script>
+    @if(session()->has('loginError'))
+      toastr.options =
+      {
+        "closeButton" : true,
+        "progressBar" : true
+      }
+      toastr.error("{{ session('loginError') }}");
+    @endif
+  </script>
+  @endpush
     <div class="card-header text-center">
     <img src="{{url('img/logo2.png')}}" alt="eJadwal" class="" style="width:70px; height:70px">
     </div>
