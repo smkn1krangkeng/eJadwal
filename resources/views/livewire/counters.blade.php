@@ -11,10 +11,25 @@
 <li class="breadcrumb-item active">Counters</li>
 @endsection
 <div>
-<div class="divider bg-dark rounded mb-4">
-    <button wire:click="increment" class="btn btn-success my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Increment">
-    +
-    </button>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Store</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      @foreach($hasil as $row)
+      Nilai {{ $row }}<br>
+      @endforeach
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <form wire:submit.prevent="store">
+        @csrf
+        <label>Nilai:</label>
+        <input wire:model='nilai' name="nilai" />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   </div>
-    <h1>{{ $count }}</h1>
 </div>

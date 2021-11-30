@@ -75,26 +75,18 @@
 <li class="breadcrumb-item active">Users</li>
 @endsection
 <div>
-  <div class="divider bg-dark rounded mb-4">
-    <button wire:click="create" class="btn btn-success my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Add User">
-    Add User
-    </button>
-    <button class="btn btn-success my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Export Users to Excel">
-    Export
-    </button>
-    <button class="btn btn-warning my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Import Users from Excel">
-      Import
-    </button>
-    <button class="btn btn-primary my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Add/Edit User Roles & Permissions">
-      Roles & Permissions
-    </button>
-    <button class="btn btn-danger my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Delete Users Selection">
-      Delete Selection
-    </button>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">List</a>
+      <a class="nav-item nav-link" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="false">Add User</a>
+    </div>
+  </nav>
+  <div class="tab-content mt-4" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+      @include('livewire.users.users-index')
+    </div>
+    <div class="tab-pane fade" id="nav-add" role="tabpanel" aria-labelledby="nav-add-tab">
+      @include('livewire.users.users-create')
+    </div>
   </div>
-  @if($isAction=='read')
-    @include('livewire.users.users-index')
-  @elseif($isAction=='create')
-    @include('livewire.users.users-create')
-  @endif
 </div>

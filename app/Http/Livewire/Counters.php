@@ -6,11 +6,15 @@ use Livewire\Component;
 
 class Counters extends Component
 {
-    public $count = 0;
- 
-    public function increment()
+    public $nilai;
+    public $hasil=[];
+    public $i=0;
+
+
+    public function store()
     {
-        $this->count++;
+        $this->i++;
+        $this->hasil[ $this->i]=$this->nilai;
     }
  
     public function render()
