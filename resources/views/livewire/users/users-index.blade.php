@@ -28,8 +28,8 @@
                     {{$row->permissions->pluck('name')->implode(', ')}} 
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                    <button type="button" wire:click.prefetch="edit({{ $row->id }})"class="btn btn-primary btn-sm">Edit</button>
+                    <button type="button" wire:click="delete({{ $row->id }})" class="btn btn-danger btn-sm">Delete</button>
                 </td>
             </tr>
         @endforeach

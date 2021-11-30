@@ -19,17 +19,21 @@
   </nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-      @foreach($hasil as $row)
-      Nilai {{ $row }}<br>
-      @endforeach
+    <input type="text" wire:model="author">
+ 
+    <input type="text" wire:model="post.title" />
+ 
+    <textarea wire:model="post.content"></textarea>
+    <div wire:loading wire:target="post">
+      <div class="spinner-border text-primary">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
+    {{ $author}}
+    </div>
+
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-      <form wire:submit.prevent="store">
-        @csrf
-        <label>Nilai:</label>
-        <input wire:model='nilai' name="nilai" />
-        <button type="submit">Submit</button>
-      </form>
+      Store
     </div>
   </div>
 </div>
